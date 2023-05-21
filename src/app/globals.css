@@ -1,0 +1,81 @@
+@import "/public/fonts/Nunito-Bold.ttf";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+/* UTIL CLASES */
+@layer components {
+  .container {
+    @apply max-w-[85%] mx-auto;
+  }
+
+  .serch-bar-item {
+    @apply shadow rounded-full flex items-center cursor-pointer hover:shadow-md transition p-[0.4rem] border-[1px];
+  }
+
+  .user-menu-item {
+    @apply hover:bg-gray-100 px-4 py-2 cursor-pointer transition capitalize block;
+  }
+
+  .form-input {
+    @apply outline-1 outline outline-gray-200 p-1 rounded-md;
+  }
+
+  .form-submit {
+    @apply bg-rose-500  text-white  text-base hover:bg-rose-500/70;
+  }
+  .form-submit:is(.disabled) {
+    @apply bg-rose-500/60 hover:bg-rose-500/60;
+  }
+  .form-regular {
+    @apply bg-white text-base border border-black hover:bg-slate-100;
+  }
+  .form-regular:is(.disabled) {
+    @apply bg-rose-500/60 hover:bg-rose-500/60;
+  }
+
+  .btn {
+    @apply p-2 rounded-md capitalize outline-none  transition ease-in-out duration-500;
+  }
+  .btn-social {
+    @apply bg-white border relative border-gray-400 hover:bg-white/20;
+  }
+  .btn-social:is(.disabled) {
+    @apply bg-black/5 hover:bg-black/5;
+  }
+
+  .form-label {
+    @apply mb-2 text-sm text-gray-500 capitalize;
+  }
+
+  .grid-listing-img {
+    grid-template-columns: repeat(5, minmax(8rem, 1fr));
+
+    grid-template-areas:
+      "main main main img1 img2"
+      "main main main img1 img2"
+      "main main main img3 img4"
+      "main main main img3 img4";
+  }
+
+  .grid-listing-main {
+    grid-area: main;
+  }
+  .grid-listing-img1 {
+    grid-area: img1;
+  }
+  .grid-listing-img2 {
+    grid-area: img2;
+  }
+  .grid-listing-img3 {
+    grid-area: img3;
+  }
+  .grid-listing-img4 {
+    grid-area: img4;
+  }
+}
