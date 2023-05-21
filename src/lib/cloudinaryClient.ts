@@ -6,16 +6,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// const uploadImage = async (file: any) => {
-//   try {
-//     const res = await cloudinary.uploader.upload(file, {
-//       upload_preset: process.env.CLOUDINARY_PRESET,
-//     });
-//     console.log(res);
-//     return;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-export default cloudinary;
+export const uploadImage = (file: any, folderName: string) => {
+  try {
+    return cloudinary.uploader.upload(file, {
+      upload_preset: process.env.CLOUDINARY_PRESET,
+      folder: folderName,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
