@@ -19,6 +19,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(user);
   } catch (error) {
+    console.log(error);
     throw new Error(ErrorMap.invalidCreds);
   }
 }

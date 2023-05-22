@@ -1,5 +1,6 @@
 "use client";
-// import { icons } from "@/constants/categoryMap";
+
+import { signIn } from "next-auth/react";
 
 const socialBtns = [
   {
@@ -22,12 +23,13 @@ const SocialButton = ({ isLoading }: Props) => {
       {socialBtns.map(({ provider }) => {
         return (
           <button
+            type="button"
             key={provider}
             disabled={isLoading}
             className={`btn btn-social ${isLoading ? "disabled" : ""} mt-4`}
+            onClick={() => signIn(provider)}
           >
             {`continue with ${provider}`}
-            {/* <Icon size={20} className="absolute top-2.5" /> */}
           </button>
         );
       })}

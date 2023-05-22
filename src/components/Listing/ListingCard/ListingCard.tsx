@@ -19,6 +19,8 @@ const ListingCard = ({
     <article>
       <section className="aspect-square w-full h-72 overflow-hidden rounded-xl relative">
         <Image
+          priority
+          sizes="large"
           alt="listing image"
           src={listing.imageSrc}
           fill
