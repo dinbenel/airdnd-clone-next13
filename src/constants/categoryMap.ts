@@ -61,7 +61,7 @@ export const categoryMap: Record<string, any> = {
   GiCastle: castle,
   FaSkiing: sking,
   GiBoatFishing: fishingBoat,
-  GiIsland: island,
+  GiIsland: island, //
   TbPool: pool,
   MdOutlineVilla: villa,
 };
