@@ -1,9 +1,10 @@
 import CategoryCard from "./CategoryCard";
 import { categoryMap } from "../../constants/categoryMap";
+import prisma from "../../lib/prismaClient";
 import { getAllCategories } from "@/services/categoryService";
 
 const CategoryList = async () => {
-  const { data: categories } = await getAllCategories();
+  const categories = await prisma?.category.findMany();
 
   return (
     <section className="flex overflow-x-auto justify-between gap-2 container mb-4">
