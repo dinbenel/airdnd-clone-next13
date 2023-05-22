@@ -1,14 +1,14 @@
 "use client";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 const socialBtns = [
   {
     provider: "github",
-    Icon: icons.BsGithub,
+    // Icon: icons.BsGithub,
   },
   {
     provider: "google",
-    Icon: icons.BsGoogle,
+    // Icon: icons.BsGoogle,
   },
 ] as const;
 
@@ -19,7 +19,7 @@ type Props = {
 const SocialButton = ({ isLoading }: Props) => {
   return (
     <>
-      {socialBtns.map(({ Icon, provider }) => {
+      {socialBtns.map(({ provider }) => {
         return (
           <button
             key={provider}
@@ -27,7 +27,7 @@ const SocialButton = ({ isLoading }: Props) => {
             className={`btn btn-social ${isLoading ? "disabled" : ""} mt-4`}
           >
             {`continue with ${provider}`}
-            <Icon size={20} className="absolute top-2.5" />
+            {/* <Icon size={20} className="absolute top-2.5" /> */}
           </button>
         );
       })}

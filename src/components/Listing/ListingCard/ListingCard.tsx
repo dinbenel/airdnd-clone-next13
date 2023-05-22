@@ -17,7 +17,7 @@ const ListingCard = ({
 
   return (
     <article>
-      <section className=" aspect-square w-full h-72 overflow-hidden rounded-xl relative">
+      <section className="aspect-square w-full h-72 overflow-hidden rounded-xl relative">
         <Image
           alt="listing image"
           src={listing.imageSrc}

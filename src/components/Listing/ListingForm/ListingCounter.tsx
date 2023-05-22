@@ -1,6 +1,6 @@
 "use client";
 import { ListingModel } from "@/Models/ListingModel";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 type Props = {
   main: string;
@@ -38,11 +38,11 @@ const ListingCounter = ({ main, secondary, onClick, value, type }: Props) => {
       </section>
       <section className="flex items-center gap-3">
         <button onClick={onAdd} className="border-[2px] rounded-full p-2">
-          <icons.IoAddOutline />
+          {/* <icons.IoAddOutline /> */}
         </button>
         <div>{value}</div>
         <button onClick={onSubtract} className="border-[2px] rounded-full p-2">
-          <icons.IoRemove />
+          {/* <icons.IoRemove /> */}
         </button>
       </section>
     </section>

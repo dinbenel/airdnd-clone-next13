@@ -14,7 +14,7 @@ import { createListing } from "@/services/listingService";
 import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 function ListingForm() {
   const { isOpen, onClose, resetListing } = useListing();
@@ -102,11 +102,11 @@ function ListingForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <AppModal isOpen={isOpen}>
             <section className="flex p-5 shadow-sm items-center justify-center">
-              <icons.IoClose
+              {/* <icons.IoClose
                 onClick={onCloseModal}
                 size={30}
                 className="cursor-pointer absolute left-1"
-              />
+              /> */}
               <h2 className="capitalize text-lg font-bold">
                 airDnD your home!
               </h2>

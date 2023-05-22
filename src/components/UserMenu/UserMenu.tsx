@@ -5,7 +5,7 @@ import { useLogister } from "@/store/LogisterStore";
 import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 type Props = {
   children: ReactNode;
@@ -46,8 +46,8 @@ const UserMenu = ({ children, user }: Props) => {
       </div>
       <div ref={menuRef}>
         <div className="serch-bar-item flex gap-4" onClick={handleUserMenuOpen}>
-          <icons.TbMenu2 size={17} />
-          <icons.TbUserCircle size={28} className="text-gray-500" />
+          {/* <icons.TbMenu2 size={17} /> */}
+          {/* <icons.TbUserCircle size={28} className="text-gray-500" /> */}
         </div>
 
         {isOpen && children}

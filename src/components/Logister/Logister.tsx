@@ -12,7 +12,7 @@ import AppModal from "../AppModal/AppModal";
 import { FormValues } from "@/Models/UserModel";
 import { useLogister } from "@/store/LogisterStore";
 import { registerUser } from "@/services/userService";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 type Props = {
   formVals: FormValues;
@@ -64,11 +64,11 @@ const Logister = ({ formVals }: Props) => {
   return (
     <AppModal isOpen={isOpen}>
       <div className="relative flex flex-col w-full items-center justify-center bg-gray-50 p-4 rounded-lg">
-        <icons.IoClose
+        {/* <icons.IoClose
           onClick={onClose}
           size={30}
           className="cursor-pointer absolute left-1 top-0"
-        />
+        /> */}
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="flex flex-col w-full p-4"

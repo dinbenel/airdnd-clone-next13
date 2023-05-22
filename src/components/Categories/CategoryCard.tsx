@@ -2,6 +2,7 @@
 import { categoryMap } from "@/constants/categoryMap";
 import { useCategory } from "@/store/CategoryStore";
 import { CategoryIcon } from "@prisma/client";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
@@ -32,13 +33,15 @@ const CategoryCard = ({ label, icon }: Props) => {
   const Icon = categoryMap[icon];
   return (
     <div
-      className={`flex flex-col   items-center hover:text-neutral-500 cursor-pointer transition ${
+      className={`flex flex-col items-center hover:text-gray-300 cursor-pointer transition ${
         selected.has(label) ? "text-gray-300" : "text-gray-600"
       }`}
       onClick={() => onSelect(label)}
     >
-      {Icon && <Icon size={30} />}
-      <p className="capitalize  font-nunito font-bold text-sm mt-1">{label}</p>
+      {Icon && <Icon className="text-3xl" />}
+      <p className="capitalize font-nunito font-bold text-sm mt-[1px]">
+        {label}
+      </p>
     </div>
   );
 };

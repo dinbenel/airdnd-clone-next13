@@ -1,8 +1,7 @@
 "use client";
-
 import { http } from "@/services/apiService";
 import { useState } from "react";
-import { icons } from "@/constants/categoryMap";
+import { HeartFillSvg, HeartSvg } from "../svg";
 
 type Props = {
   listingId: string;
@@ -27,7 +26,6 @@ const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
 
   const handleUserFavs = (action: "like" | "disLike") => {
     const likes = [...listingLikedBy];
-    console.log(action);
     if (action === "disLike") {
       const idx = likes.indexOf(userId);
       likes.splice(idx, 1);
@@ -38,23 +36,16 @@ const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
   };
 
   return (
-    <div className="absolute -top-[5px] right-[5px]">
-      <button
-        onClick={() => toglleFav(!isLiked ? "like" : "disLike")}
-        className="relative"
-      >
-        <icons.TbHeart
-          size={29}
-          color="white"
-          className=" absolute top-0 right-0"
-        />
-        <icons.TbHeartFilled
-          size={20}
-          color={isLiked ? "#f43f5e" : "#4b5563"}
-          className={`absolute top-[2.5px] right-[4.4px]       
-          `}
-        />
-      </button>
+    <div
+      className="relative"
+      onClick={() => toglleFav(!isLiked ? "like" : "disLike")}
+    >
+      <HeartSvg className="absolute text-3xl  fill-white right-0" />
+      <HeartFillSvg
+        className={`absolute text-[1.4rem] right-[3px] top-[3.5px] ${
+          isLiked ? "fill-rose-400" : "fill-slate-400"
+        }`}
+      />
     </div>
   );
 };

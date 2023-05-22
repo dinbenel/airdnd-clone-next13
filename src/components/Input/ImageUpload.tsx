@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { useListing } from "@/store/ListingStore";
 import { http } from "@/services/apiService";
 import { ListingModel } from "@/Models/ListingModel";
-import { icons } from "@/constants/categoryMap";
+// import { icons } from "@/constants/categoryMap";
 
 const ImageUpload = ({ className }: { className?: string }) => {
   const { setValue } = useFormContext<ListingModel<string[]>>();
@@ -56,17 +56,17 @@ const ImageUpload = ({ className }: { className?: string }) => {
             />
             <div className="bg-black/50 absolute bottom-0 left-0 right-0 top-150 p-2 flex justify-between">
               <button className="text-white" onClick={onConfirm}>
-                <icons.IoCheckmarkSharp size={18} />
+                {/* <icons.IoCheckmarkSharp size={18} /> */}
               </button>
               <button className="text-white" onClick={onRetake}>
-                <icons.FaUndo size={18} />
+                {/* <icons.FaUndo size={18} /> */}
               </button>
             </div>
           </div>
         ) : (
           <div className="h-52 flex flex-col items-center justify-center">
             <label htmlFor="img-upload">
-              <icons.FaPhotoVideo size={30} />
+              {/* <icons.FaPhotoVideo size={30} /> */}
             </label>
 
             <h4 className="text-base font-semibold text-neutral-800 ">

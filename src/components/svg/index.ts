@@ -1,0 +1,17 @@
+export { default as BarnSvg } from "./Barn.svg";
+export { default as BeachSvg } from "./Beach.svg";
+export { default as CactusSvg } from "./Cactus.svg";
+export { default as CastleSvg } from "./Castle.svg";
+export { default as CaveEntranceSvg } from "./CaveEntrance.svg";
+export { default as DiamondSvg } from "./Diamond.svg";
+export { default as FishingBoatSvg } from "./FishingBoat.svg";
+export { default as ForestCampSvg } from "./ForestCamp.svg";
+export { default as HeartSvg } from "./Heart.svg";
+export { default as HeartFillSvg } from "./HeartFill.svg";
+export { default as IslandSvg } from "./Island.svg";
+export { default as MountainSvg } from "./Mountain.svg";
+export { default as PoolSvg } from "./Pool.svg";
+export { default as SkingSvg } from "./Sking.svg";
+export { default as SnowSvg } from "./Snow.svg";
+export { default as VillaSvg } from "./Villa.svg";
+export { default as WindmillSvg } from "./Windmill.svg";
