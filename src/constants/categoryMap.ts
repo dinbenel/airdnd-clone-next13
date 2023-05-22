@@ -1,25 +1,28 @@
-import {
-  GiBarn,
-  GiBoatFishing,
-  GiCactus,
-  GiCastle,
-  GiCaveEntrance,
-  GiForestCamp,
-  GiIsland,
-  GiWindmill,
-} from "react-Icons/gi";
+import barn from "../assets/svg/barn-svgrepo-com.svg";
+import fishingBoat from "../assets/svg/boat-fishing-svgrepo-com.svg";
+import villa from "../assets/svg/house-with-garden-svgrepo-com.svg";
+import pool from "../assets/svg/swimming-swim-svgrepo-com.svg";
+import island from "../assets/svg/island-svgrepo-com.svg";
+import sking from "../assets/svg/ski-svgrepo-com.svg";
+import castle from "../assets/svg/castle-svgrepo-com.svg";
+import caveEntrance from "../assets/svg/cave-entrance-svgrepo-com.svg";
+import forestCamp from "../assets/svg/forest-camp-svgrepo-com.svg";
+import snow from "../assets/svg/snow-crystal-1-svgrepo-com.svg";
+import cactus from "../assets/svg/cactus-svgrepo-com.svg";
+import diamond from "../assets/svg/diamond-svgrepo-com.svg";
+
+import { GiWindmill } from "react-Icons/gi";
 import {
   TbBeach,
   TbMountain,
-  TbPool,
   TbHeartFilled,
   TbMenu2,
   TbHeart,
   TbUserCircle,
   TbSearch,
 } from "react-Icons/tb";
-import { FaSkiing, FaUndo, FaPhotoVideo, FaHotel } from "react-Icons/fa";
-import { BsSnow, BsGoogle, BsGithub } from "react-Icons/bs";
+import { FaUndo, FaPhotoVideo, FaHotel } from "react-Icons/fa";
+import { BsGoogle, BsGithub } from "react-Icons/bs";
 import {
   IoDiamond,
   IoClose,
@@ -27,8 +30,6 @@ import {
   IoRemove,
   IoCheckmarkSharp,
 } from "react-Icons/io5";
-import { MdOutlineVilla } from "react-Icons/md";
-import { IconType } from "react-icons";
 
 export const icons = {
   TbHeartFilled,
@@ -47,20 +48,20 @@ export const icons = {
   FaHotel,
 };
 
-export const categoryMap: Record<string, IconType> = {
+export const categoryMap: Record<string, any> = {
   TbBeach,
   TbMountain,
   GiWindmill,
-  IoDiamond,
-  GiBarn,
-  GiCactus,
-  BsSnow,
-  GiForestCamp,
-  GiCaveEntrance,
-  GiCastle,
-  FaSkiing,
-  GiBoatFishing,
-  GiIsland,
-  TbPool,
-  MdOutlineVilla,
+  IoDiamond: diamond,
+  GiBarn: barn,
+  GiCactus: cactus,
+  BsSnow: snow,
+  GiForestCamp: forestCamp,
+  GiCaveEntrance: caveEntrance,
+  GiCastle: castle,
+  FaSkiing: sking,
+  GiBoatFishing: fishingBoat,
+  GiIsland: island,
+  TbPool: pool,
+  MdOutlineVilla: villa,
 };
