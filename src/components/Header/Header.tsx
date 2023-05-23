@@ -1,7 +1,6 @@
 import { User } from "@prisma/client";
 import NavBar from "./NavBar";
 import ClientOnley from "../ClientOnley/ClientOnley";
-import { getAllCategories } from "@/services/categoryService";
 
 type Props = {
   user?: User;

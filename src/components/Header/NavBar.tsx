@@ -5,6 +5,7 @@ import UserMenu from "../UserMenu/UserMenu";
 import UserMenuItem from "../UserMenu/UserMenuItem";
 import GuestMenuItem from "../UserMenu/GuestMenuItem";
 import { User } from "@prisma/client";
+import { useLogedInUser } from "@/store/UserStore";
 
 type Props = {
   user?: User;

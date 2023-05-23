@@ -16,10 +16,7 @@ const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
     if (!userId) return;
     setIsLiked((prev) => {
       const likes = handleUserFavs(action);
-      console.log(likes);
-      http
-        .put("/listing/fav", { userIds: likes, listingId })
-        .then((res) => console.log("RES", res));
+      http.put("/listing/fav", { userIds: likes, listingId });
       return !prev;
     });
   };

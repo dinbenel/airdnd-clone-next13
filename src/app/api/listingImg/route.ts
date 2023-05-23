@@ -5,15 +5,15 @@ import { uploadImage } from "@/lib/fireBaseClient";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = await req.formData();
     const user = await getServerSession();
+    const file = body.get("file") as File;
 
-    const imgUrl = await uploadImage(
-      `${user?.user?.email}/${new Date().toISOString()}`,
-      body.img
-    );
-    return NextResponse.json(imgUrl);
+    const imgUrl = await uploadImage(`${user?.user?.email}/ggg`, file);
+    console.log(imgUrl);
+    return NextResponse.json("imgUrl");
   } catch (error) {
+    console.log(error);
     throw new Error(ErrorMap.uploadImg);
   }
 }

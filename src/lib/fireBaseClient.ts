@@ -1,28 +1,35 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+} from "firebase/storage";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCyREv9Fq9UDgCDahxXetXbjCx_uYrVijU",
-  authDomain: "airdnd-nextjs.firebaseapp.com",
-  projectId: "airdnd-nextjs",
-  storageBucket: "airdnd-nextjs.appspot.com",
-  messagingSenderId: "504396098192",
-  appId: "1:504396098192:web:d1de6d6a739e8bd61c4615",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
 let app = getApps()[0];
 if (!app) {
   app = initializeApp(firebaseConfig);
 }
 const storage = getStorage(app);
 
-export const uploadImage = async (path: string, img: any) => {
+export const uploadImage = (path: string, img: any) => {
   const imgRef = ref(storage, path);
-  const res = await uploadBytes(imgRef, img);
-  console.log(res);
+  return uploadBytes(imgRef, img);
+};
+
+export const getImageUrl = async (path: string) => {
+  const imgListRef = ref(storage, path);
+  const imageList = await listAll(imgListRef);
+
+  return getDownloadURL(imageList.items[0]);
 };

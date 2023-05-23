@@ -14,8 +14,9 @@ import { createListing } from "@/services/listingService";
 import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
+import { User } from "@prisma/client";
 
-function ListingForm() {
+function ListingForm({ user }: { user?: User }) {
   const { isOpen, onClose, resetListing } = useListing();
   const [activStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +48,7 @@ function ListingForm() {
     0: <CategoryStep />,
     1: <LocationStep />,
     2: <InfoStep />,
-    3: <ImageStep />,
+    3: <ImageStep user={user} />,
     4: <DescriptionStep />,
     5: <PriceStep />,
   };

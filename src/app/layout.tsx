@@ -39,7 +39,7 @@ export default async function RootLayout({
       <body className={`${nunito.variable} font-nunito`}>
         <Header user={logedInUser} />
         <ClientOnley>
-          <ListingForm />
+          <ListingForm user={logedInUser} />
           <Logister formVals={{ email: "", password: "", username: "" }} />
         </ClientOnley>
         {/* @ts-expect-error Async Server Component  */}

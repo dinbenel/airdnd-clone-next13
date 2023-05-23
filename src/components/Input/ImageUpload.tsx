@@ -5,36 +5,49 @@ import { useFormContext } from "react-hook-form";
 import { useListing } from "@/store/ListingStore";
 import { http } from "@/services/apiService";
 import { ListingModel } from "@/Models/ListingModel";
-// import { icons } from "@/constants/categoryMap";
+import { useLogedInUser } from "@/store/UserStore";
+import { User } from "@prisma/client";
+import { getImageUrl, uploadImage } from "@/lib/fireBaseClient";
 
-const ImageUpload = ({ className }: { className?: string }) => {
+const ImageUpload = ({
+  className,
+  user,
+}: {
+  className?: string;
+  user?: User;
+}) => {
   const { setValue } = useFormContext<ListingModel<string[]>>();
-
   const [img, setImg] = useState<string>("");
+  const [file, setFile] = useState<File>();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const addImgSrc = useListing((state) => state.addImgSrc);
 
-  const uploadFile = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const uploadFile = async ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (!target.files?.length) return;
     const formData = new FormData();
     formData.append("file", target.files[0]);
+    setFile(target.files[0]);
     const fileReader = new FileReader();
     fileReader.onload = (ev: ProgressEvent<FileReader>) => {
-      http
-        .post("/listingImg", { img: ev.target?.result })
-        .then(({ data }) => {
-          if ("secure_url" in data) {
-            setValue("imageSrc", data.secure_url);
-          }
-        })
-        .catch(console.log);
       setImg(ev.target?.result as string);
     };
     fileReader.readAsDataURL(target.files[0]);
   };
 
-  const onConfirm = () => {
-    addImgSrc(img);
+  const onConfirm = async () => {
+    try {
+      const _ = await uploadImage(`${user?.email}/${file?.name}`, file);
+      const url = await getImageUrl(`${user?.email}/`);
+      // http.post("/listingImg", file, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      setValue("imageSrc", url);
+      console.log(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onRetake = () => {
@@ -57,6 +70,7 @@ const ImageUpload = ({ className }: { className?: string }) => {
             <div className="bg-black/50 absolute bottom-0 left-0 right-0 top-150 p-2 flex justify-between">
               <button className="text-white" onClick={onConfirm}>
                 {/* <icons.IoCheckmarkSharp size={18} /> */}
+                Conf
               </button>
               <button className="text-white" onClick={onRetake}>
                 {/* <icons.FaUndo size={18} /> */}
@@ -66,6 +80,7 @@ const ImageUpload = ({ className }: { className?: string }) => {
         ) : (
           <div className="h-52 flex flex-col items-center justify-center">
             <label htmlFor="img-upload">
+              upload
               {/* <icons.FaPhotoVideo size={30} /> */}
             </label>
 

@@ -6,7 +6,7 @@ const BASE_URL =
     : "https://airdnd-clone-next13.vercel.app/api";
 
 export const http = axios.create({
-  baseURL: "https://airdnd-clone-next13.vercel.app/api",
+  baseURL: BASE_URL,
   timeout: 60000,
   headers: {
     "Content-Type": "application/json",
