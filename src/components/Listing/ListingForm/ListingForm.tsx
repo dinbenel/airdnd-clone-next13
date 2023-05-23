@@ -14,7 +14,6 @@ import { createListing } from "@/services/listingService";
 import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
-// import { icons } from "@/constants/categoryMap";
 
 function ListingForm() {
   const { isOpen, onClose, resetListing } = useListing();

@@ -1,10 +1,12 @@
 import { ListingPreview } from "@/components";
+import { getAllCategories } from "@/services/categoryService";
 import { getAllListing } from "@/services/listingService";
 import { getLogedInUser } from "@/utils/getLogedInUser";
+import { Suspense } from "react";
 
 export default async function Home() {
   const logedInUserPrm = getLogedInUser();
-  const listingsPrm = getAllListing(); //
+  const listingsPrm = getAllListing();
 
   const [{ data: listings }, logedInUser] = await Promise.all([
     listingsPrm,
@@ -13,7 +15,9 @@ export default async function Home() {
 
   return (
     <main className="container">
-      <ListingPreview listings={listings} user={logedInUser} />
+      <Suspense fallback={<>Loading</>}>
+        <ListingPreview listings={listings} user={logedInUser} />
+      </Suspense>
     </main>
   );
 }

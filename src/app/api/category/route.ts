@@ -1,7 +1,8 @@
 import { ErrorMap } from "@/constants/errorMap";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prismaClient";
 
-export async function GET(req: Request) {
+export async function GET(_: Request) {
   try {
     const categories = prisma && (await prisma.category.findMany());
     if (!categories?.length) NextResponse.json({ msg: "no found" });

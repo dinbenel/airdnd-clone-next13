@@ -36,7 +36,7 @@ export const useCategory = create<CategoryStore>((set, get) => ({
   },
   setCategories: async () => {
     if (get().categories.length > 0) return;
-    console.log("first");
+
     try {
       const { data } = await getAllCategories();
       if (data) {

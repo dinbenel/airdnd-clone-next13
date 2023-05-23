@@ -3,9 +3,7 @@ import { useClickAwayLisiner } from "@/hooks/useClickAwayLisiner";
 import { useListing } from "@/store/ListingStore";
 import { useLogister } from "@/store/LogisterStore";
 import { User } from "@prisma/client";
-import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
-// import { icons } from "@/constants/categoryMap";
 
 type Props = {
   children: ReactNode;
@@ -16,7 +14,7 @@ const UserMenu = ({ children, user }: Props) => {
   const onOpen = useListing((state) => state.onOpen);
   const onOpenLogister = useLogister((state) => state.onOpen);
   const open = useListing((state) => state.isOpen);
-  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleUserMenuOpen = () => {
