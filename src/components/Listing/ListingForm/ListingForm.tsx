@@ -15,6 +15,8 @@ import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
 import { User } from "@prisma/client";
+import { ExitSvg } from "@/components/svg";
+import Loader from "@/components/Loader/Loader";
 
 function ListingForm({ user }: { user?: User }) {
   const { isOpen, onClose, resetListing } = useListing();
@@ -102,11 +104,10 @@ function ListingForm({ user }: { user?: User }) {
         <form onSubmit={handleSubmit(onSubmit)}>
           <AppModal isOpen={isOpen}>
             <section className="flex p-5 shadow-sm items-center justify-center">
-              {/* <icons.IoClose
+              <ExitSvg
                 onClick={onCloseModal}
-                size={30}
-                className="cursor-pointer absolute left-1"
-              /> */}
+                className="cursor-pointer absolute left-2 top-2"
+              />
               <h2 className="capitalize text-lg font-bold">
                 airDnD your home!
               </h2>
@@ -133,15 +134,7 @@ function ListingForm({ user }: { user?: User }) {
                 onClick={onNext}
               />
             </section>
-            <section className="w-full flex justify-center p-4">
-              <BeatLoader
-                color={"#f43f5e"}
-                loading={isLoading}
-                size={20}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-              />
-            </section>
+            <Loader isLoading={isLoading} size={20} />
           </AppModal>
         </form>
       </FormProvider>

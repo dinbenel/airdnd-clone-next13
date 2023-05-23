@@ -4,6 +4,8 @@ import { useListing } from "@/store/ListingStore";
 import { useLogister } from "@/store/LogisterStore";
 import { User } from "@prisma/client";
 import { ReactNode, useState } from "react";
+import { MenuSvg, UserAvatarSvg } from "../svg";
+import Image from "next/image";
 
 type Props = {
   children: ReactNode;
@@ -43,9 +45,22 @@ const UserMenu = ({ children, user }: Props) => {
         airdnd your home
       </div>
       <div ref={menuRef}>
-        <div className="serch-bar-item flex gap-4" onClick={handleUserMenuOpen}>
-          {/* <icons.TbMenu2 size={17} /> */}
-          {/* <icons.TbUserCircle size={28} className="text-gray-500" /> */}
+        <div
+          className="serch-bar-item flex gap-2 p-[0.5rem] w-20 items-center justify-center"
+          onClick={handleUserMenuOpen}
+        >
+          <MenuSvg className="text-gray-500" />
+          {user?.image ? (
+            <Image
+              src={user.image}
+              alt=""
+              width={25}
+              height={25}
+              className="rounded-full"
+            />
+          ) : (
+            <UserAvatarSvg className="text-gray-500 text-3xl" />
+          )}
         </div>
 
         {isOpen && children}

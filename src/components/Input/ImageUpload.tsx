@@ -8,6 +8,7 @@ import { ListingModel } from "@/Models/ListingModel";
 import { useLogedInUser } from "@/store/UserStore";
 import { User } from "@prisma/client";
 import { getImageUrl, uploadImage } from "@/lib/fireBaseClient";
+import { AddPhotoSvg, ConfirmSvg, UndoSvg } from "../svg";
 
 const ImageUpload = ({
   className,
@@ -67,26 +68,26 @@ const ImageUpload = ({
               fill
               className="object-cover h-full w-full"
             />
-            <div className="bg-black/50 absolute bottom-0 left-0 right-0 top-150 p-2 flex justify-between">
-              <button className="text-white" onClick={onConfirm}>
-                {/* <icons.IoCheckmarkSharp size={18} /> */}
-                Conf
-              </button>
+            <div className="bg-black/50 absolute bottom-0 left-0 right-0 top-150 py-2 px-3 flex justify-between">
               <button className="text-white" onClick={onRetake}>
-                {/* <icons.FaUndo size={18} /> */}
+                <UndoSvg className="text-2xl" />
+              </button>
+              <button className="text-white" onClick={onConfirm}>
+                <ConfirmSvg className="text-2xl" />
               </button>
             </div>
           </div>
         ) : (
           <div className="h-52 flex flex-col items-center justify-center">
-            <label htmlFor="img-upload">
-              upload
-              {/* <icons.FaPhotoVideo size={30} /> */}
+            <label
+              htmlFor="img-upload"
+              className="flex flex-col items-center cursor-pointer"
+            >
+              <AddPhotoSvg className="text-6xl text-neutral-700" />
+              <span className="text-base font-semibold text-neutral-500">
+                click to upload
+              </span>
             </label>
-
-            <h4 className="text-base font-semibold text-neutral-800 ">
-              click to upload
-            </h4>
           </div>
         )}
         <input

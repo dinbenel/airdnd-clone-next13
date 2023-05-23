@@ -11,6 +11,8 @@ import AppModal from "../AppModal/AppModal";
 import { FormValues } from "@/Models/UserModel";
 import { useLogister } from "@/store/LogisterStore";
 import { registerUser } from "@/services/userService";
+import Loader from "../Loader/Loader";
+import { ExitSvg } from "../svg";
 
 type Props = {
   formVals: FormValues;
@@ -59,9 +61,17 @@ const Logister = ({ formVals }: Props) => {
     }
   };
 
+  const setLoading = (loading: boolean) => {
+    setIsLoading(loading);
+  };
+
   return (
     <AppModal isOpen={isOpen}>
       <div className="relative flex flex-col w-full items-center justify-center bg-gray-50 p-4 rounded-lg">
+        <ExitSvg
+          className="absolute top-2 left-2 cursor-pointer"
+          onClick={onClose}
+        />
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="flex flex-col w-full p-4"
@@ -107,15 +117,8 @@ const Logister = ({ formVals }: Props) => {
             <span className="text-base text-gray-400">or</span>
             <div className=" bg-slate-200/50 h-[2px] w-[47%]"></div>
           </div>
-          <SocialButton isLoading={isLoading} />
-          <BeatLoader
-            className=" self-center mt-4"
-            color={"#f43f5e"}
-            loading={isLoading}
-            size={15}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-          />
+          <SocialButton isLoading={isLoading} setLoading={setLoading} />
+          <Loader isLoading={isLoading} size={15} />
         </form>
       </div>
     </AppModal>

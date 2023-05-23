@@ -1,5 +1,5 @@
 "use client";
-// import { icons } from "@/constants/categoryMap";
+import { SearchSvg } from "../svg";
 
 const SearchBar = () => {
   return (
@@ -11,7 +11,7 @@ const SearchBar = () => {
       <div className="text-center pl-6 font-semibold capitalize flex items-center justify-between gap-2">
         <span>guests</span>
         <div className="bg-rose-500 rounded-full p-[0.25rem] ">
-          {/* <icons.TbSearch size={20} className="text-white" /> */}
+          <SearchSvg className="text-white text-2xl" />
         </div>
       </div>
     </div>

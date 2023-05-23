@@ -6,7 +6,12 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["flagcdn.com", "firebasestorage.googleapis.com"],
+    domains: [
+      "flagcdn.com",
+      "firebasestorage.googleapis.com",
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+    ],
   },
   webpack(config) {
     config.module.rules.push({
