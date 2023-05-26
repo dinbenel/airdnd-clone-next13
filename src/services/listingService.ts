@@ -6,7 +6,7 @@ const getAllListing = () => {
 };
 
 const getListingById = (id: string) => {
-  return http.get<DBListing>(`/listing/${id}`);
+  return http.get<DBListing>(`/listing?id=${id}`);
 };
 
 const createListing = (listing: Omit<ListingModel<string[]>, "user">) => {

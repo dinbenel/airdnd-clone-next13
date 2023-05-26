@@ -8,6 +8,20 @@ body {
   height: 100%;
 }
 
+/* remove map watermark */
+body
+  > section:nth-child(2)
+  > form
+  > div
+  > div
+  > section:nth-child(2)
+  > section
+  > div
+  > div.mapboxgl-control-container
+  > div.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
 /* UTIL CLASES */
 @layer components {
   .container {

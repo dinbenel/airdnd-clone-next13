@@ -55,18 +55,15 @@ export async function POST(req: IReq) {
   }
 }
 
-type Args = {
-  params: {
-    id?: string;
-  };
-};
-
-export async function GET(req: Request, { params }: Args) {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const obj = Object.fromEntries(searchParams.entries());
+  const id = searchParams.get("id");
   try {
-    if (params?.id) {
+    if (id) {
       const listing = await prisma?.listing.findUnique({
         where: {
-          id: params.id,
+          id,
         },
         include: {
           category: true,
@@ -85,9 +82,6 @@ export async function GET(req: Request, { params }: Args) {
       });
       return NextResponse.json(listing);
     }
-
-    const { searchParams } = new URL(req.url);
-    const obj = Object.fromEntries(searchParams.entries());
 
     const listings = await prisma?.listing.findMany({
       include: {

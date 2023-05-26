@@ -75,6 +75,48 @@ export const categories = [
     description: "This property is brand new and luxurious!",
   },
 ] as const;
+const amenities = [
+  {
+    label: "TV",
+    description: "this place has TV",
+  },
+  {
+    label: "Wifi",
+    description: "this place has Wifi",
+  },
+  {
+    label: "Kitchen",
+    description: "this place has Kitchen",
+  },
+  {
+    label: "Pets allowed",
+    description: "pets are always welcome",
+  },
+  {
+    label: "Smoking allowed",
+    description: "this palce alowed smoking",
+  },
+  {
+    label: "Washer",
+    description: "this palce provides washing machine",
+  },
+  {
+    label: "Hot wate",
+    description: "this palce provides boiler for hot water",
+  },
+  {
+    label: "Refrigerator",
+    description: "this palce provides Refrigerator",
+  },
+  {
+    label: "AC",
+    description: "this palce provides air conditioning",
+  },
+  {
+    label: "pool",
+    description: "shared outdoor pool",
+  },
+] as const;
 
 export const seedCtg = async () => {
   try {
@@ -88,6 +130,24 @@ export const seedCtg = async () => {
       });
     });
     const res = await Promise.allSettled(ctgPrm);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const seedAmenities = async () => {
+  try {
+    const amnPrm = amenities.map((amn) => {
+      return prisma?.amenitiy.create({
+        data: {
+          description: amn.description,
+          label: amn.label,
+        },
+      });
+    });
+
+    const res = await Promise.allSettled(amnPrm);
     console.log(res);
   } catch (error) {
     console.log(error);

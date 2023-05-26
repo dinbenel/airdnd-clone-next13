@@ -1,6 +1,8 @@
+"use client";
 import { DBListing } from "@/Models/ListingModel";
 import HeartButton from "@/components/Button/HeartButton";
 import Image from "next/image";
+import { redirect, useRouter } from "next/navigation";
 import React from "react";
 
 const ListingCard = ({
@@ -10,13 +12,18 @@ const ListingCard = ({
   listing: DBListing;
   userId: string;
 }) => {
+  const router = useRouter();
   const likes = listing.likedBy?.reduce((acc, curr) => {
     acc.push(curr?.id);
     return acc;
   }, [] as string[]);
 
+  const onSelectListing = () => {
+    router.push(`/listing/${listing.id}`);
+  };
+
   return (
-    <article>
+    <article onClick={onSelectListing}>
       <section className="aspect-square w-full h-72 overflow-hidden rounded-xl relative">
         <Image
           priority

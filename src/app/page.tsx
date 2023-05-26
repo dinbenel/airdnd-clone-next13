@@ -1,8 +1,10 @@
 import { ListingPreview } from "@/components";
+import Map from "@/components/Map/Map";
 import { getAllCategories } from "@/services/categoryService";
 import { getAllListing } from "@/services/listingService";
 import { getLogedInUser } from "@/utils/getLogedInUser";
 import { Suspense } from "react";
+import { seedAmenities } from "../../prisma/seed";
 
 export default async function Home() {
   const logedInUserPrm = getLogedInUser();
@@ -14,7 +16,7 @@ export default async function Home() {
   ]);
 
   return (
-    <main className="container">
+    <main className="container h-[600px]">
       <Suspense fallback={<>Loading</>}>
         <ListingPreview listings={listings} user={logedInUser} />
       </Suspense>

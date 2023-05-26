@@ -7,6 +7,7 @@ type State = {
   onClose: () => void;
   isOpen: boolean;
   isSubmit: boolean;
+  selectedLatLng: number[];
   listing: ListingModel<Set<string>>;
   getCtgSet: () => ListingModel<Set<string>>["category"];
   getLocation: () => ListingModel<Set<string>>["location"];
@@ -25,6 +26,7 @@ type State = {
   setDescription: (desc: string) => void;
   setPrice: (price: number) => void;
   setIsSubmit: (submit: boolean) => void;
+  setSelectedLatLng: (lacation: any) => void;
 };
 
 const setInitialState = () => {
@@ -50,7 +52,7 @@ export const useListing = create<State>((set, get) => ({
     set({ isOpen: true });
   },
   listing: setInitialState(),
-
+  selectedLatLng: [],
   isSubmit: false,
   setLocation: (location) => {
     set((state) => ({
@@ -115,6 +117,7 @@ export const useListing = create<State>((set, get) => ({
       return {
         ...prev,
         listing: setInitialState(),
+        selectedLatLng: [],
       };
     });
   },
@@ -158,5 +161,8 @@ export const useListing = create<State>((set, get) => ({
         isSubmit: submit,
       };
     });
+  },
+  setSelectedLatLng: (location) => {
+    set({ selectedLatLng: location.latlng });
   },
 }));

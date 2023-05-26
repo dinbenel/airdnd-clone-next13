@@ -113,7 +113,7 @@ function ListingForm({ user }: { user?: User }) {
               </h2>
             </section>
             {formStep[activStep]}
-            <section className={`p-5 w-full flex gap-2 justify-between mt-6`}>
+            <section className={`p-5 w-full flex gap-2 justify-between mt-2`}>
               {activStep !== 0 && (
                 <Button
                   type="button"

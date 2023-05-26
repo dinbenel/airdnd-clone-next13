@@ -53,6 +53,7 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([userId])
 }
 
@@ -72,9 +73,10 @@ model Listing {
 
   likedBy User[] @relation(name: "likeBy")
 
-  location Location   @relation(fields: [locationId], references: [id], onDelete: Cascade)
-  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  category Category[]
+  location  Location   @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category  Category[]
+  amenities Amenitiy[]
 
   @@index([userId, locationId])
   @@index([locationId])
@@ -104,6 +106,13 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Amenitiy {
+  id          String    @id @default(cuid())
+  label       String    @unique
+  description String
+  listings    Listing[]
 }
 
 enum Role {

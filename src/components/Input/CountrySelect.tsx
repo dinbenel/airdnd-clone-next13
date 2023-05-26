@@ -13,9 +13,11 @@ const CountrySelect = ({}: Props) => {
 
   const { getAllCountries } = useCountries();
   const location = useListing((state) => state.getLocation());
+  const setSelectedLatLng = useListing((state) => state.setSelectedLatLng);
 
   const onSelect = (val: any) => {
     setValue("location", val);
+    setSelectedLatLng(val);
   };
 
   return (
