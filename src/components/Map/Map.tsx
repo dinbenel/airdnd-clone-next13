@@ -6,9 +6,10 @@ import MapGl, { Marker, Popup } from "react-map-gl";
 
 type Props = {
   zoomLevel?: number;
+  viewportVal?: [number, number];
 };
 
-const Map = ({ zoomLevel = 8 }: Props) => {
+const Map = ({ zoomLevel = 5, viewportVal }: Props) => {
   const exemp = [
     { latitude: 40.7128, longitude: -74.006 }, // New York City
     { latitude: 51.5074, longitude: -0.1278 }, // London
@@ -24,29 +25,44 @@ const Map = ({ zoomLevel = 8 }: Props) => {
   });
 
   useEffect(() => {
-    if (!selectedLatLng.length) return;
+    if (selectedLatLng.length) {
+      setViewport((prev) => {
+        return {
+          ...prev,
+          latitude: selectedLatLng[0],
+          longitude: selectedLatLng[1],
+        };
+      });
+    } else {
+      setViewport((prev) => {
+        return {
+          ...prev,
+          latitude: 51.5074,
+          longitude: -0.1278,
+        };
+      });
+    }
+  }, [selectedLatLng[0], selectedLatLng[1]]);
+
+  useEffect(() => {
+    if (!viewportVal) return;
     setViewport((prev) => {
       return {
         ...prev,
-        latitude: selectedLatLng[0],
-        longitude: selectedLatLng[1],
+        latitude: viewportVal[0],
+        longitude: viewportVal[1],
       };
     });
-  }, [selectedLatLng[0], selectedLatLng[1]]);
+  }, [viewportVal]);
 
   return (
     <>
       <MapGl
         {...viewport}
-        initialViewState={{
-          latitude: 51.5074,
-          longitude: -0.1278,
-        }}
         style={{ position: "absolute", inset: 0, overflow: "hidden" }}
         mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE_URL}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         onMove={(ev) => setViewport(ev.viewState)}
-        onLoad={(ev) => console.log(ev)}
       ></MapGl>
     </>
   );

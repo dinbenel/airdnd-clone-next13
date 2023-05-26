@@ -18,6 +18,7 @@ const CountrySelect = ({}: Props) => {
   const onSelect = (val: any) => {
     setValue("location", val);
     setSelectedLatLng(val);
+    console.log(val);
   };
 
   return (

@@ -76,6 +76,7 @@ export async function GET(req: Request) {
               name: true,
               image: true,
               role: true,
+              createdAt: true,
             },
           },
         },

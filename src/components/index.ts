@@ -4,3 +4,4 @@ export { default as Header } from "./Header/Header";
 export { default as Logister } from "./Logister/Logister";
 export { default as CategoryList } from "./Categories/CategoryList";
 export { default as ListingPreview } from "./Listing/ListingPreview/ListingPreview";
+export { default as ListingDetails } from "./Listing/ListingDetails/ListingDetails";

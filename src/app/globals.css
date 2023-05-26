@@ -27,6 +27,9 @@ body
   .container {
     @apply max-w-[85%] mx-auto;
   }
+  .secondary-container {
+    @apply max-w-[70%] mx-auto;
+  }
 
   .serch-bar-item {
     @apply shadow rounded-full flex items-center cursor-pointer hover:shadow-md transition p-[0.4rem] border-[1px];
