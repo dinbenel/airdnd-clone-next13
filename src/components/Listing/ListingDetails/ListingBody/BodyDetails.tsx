@@ -1,8 +1,8 @@
 import Heading from "@/components/Heading/Heading";
 import DatePicker from "@/components/Input/DatePicker";
 import Image from "next/image";
-import ListingReview from "../ListingReview";
-import { Review } from "@prisma/client";
+import Amenities from "../Amenities";
+import { Amenitiy } from "@prisma/client";
 
 type Props = {
   lastName: string;
@@ -12,7 +12,7 @@ type Props = {
   bath: number;
   guest: number;
   desc: string;
-  reviews: Review[];
+  amenities: Amenitiy[];
 };
 
 const BodyDetails = ({
@@ -23,7 +23,7 @@ const BodyDetails = ({
   room,
   userName,
   desc,
-  reviews,
+  amenities,
 }: Props) => {
   return (
     <div className="flex-1">
@@ -63,9 +63,18 @@ const BodyDetails = ({
         />
       </section>
       <hr className="mt-6" />
-      <section>{desc}</section>
+      <section className="min-h-[100px] flex  items-center">
+        <p>{desc}</p>
+      </section>
       <hr className="mt-6" />
-      <section>
+      <section className="min-h-[100px]">
+        <h2 className="text-neutral-700 text-2xl font-medium mt-2">
+          What this place offers
+        </h2>
+        <Amenities amenities={amenities} />
+      </section>
+      <hr className="mt-6" />
+      <section className="mt-2">
         <DatePicker />
       </section>
     </div>

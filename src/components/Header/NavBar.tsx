@@ -5,22 +5,47 @@ import UserMenu from "../UserMenu/UserMenu";
 import UserMenuItem from "../UserMenu/UserMenuItem";
 import GuestMenuItem from "../UserMenu/GuestMenuItem";
 import { User } from "@prisma/client";
-import { useLogedInUser } from "@/store/UserStore";
+import MainContainer from "../Container/MainContainer";
+import { usePathname, useRouter } from "next/navigation";
+import SecondaryContainer from "../Container/SecondaryContainer";
+import { useEffect } from "react";
 
 type Props = {
   user?: User;
 };
 
 const NavBar = ({ user }: Props) => {
-  return (
-    <nav className="container flex justify-between ">
-      <Logo />
-      <SearchBar />
-      <UserMenu user={user}>
-        {user ? <UserMenuItem /> : <GuestMenuItem />}
-      </UserMenu>
-    </nav>
-  );
+  const path = usePathname();
+
+  useEffect(() => {}, [path]);
+
+  let content;
+  if (path === "/") {
+    content = (
+      <MainContainer>
+        <nav className="flex justify-between ">
+          <Logo />
+          <SearchBar />
+          <UserMenu user={user}>
+            {user ? <UserMenuItem /> : <GuestMenuItem />}
+          </UserMenu>
+        </nav>
+      </MainContainer>
+    );
+  } else {
+    content = (
+      <SecondaryContainer>
+        <nav className="flex justify-between ">
+          <Logo />
+          <SearchBar />
+          <UserMenu user={user}>
+            {user ? <UserMenuItem /> : <GuestMenuItem />}
+          </UserMenu>
+        </nav>
+      </SecondaryContainer>
+    );
+  }
+  return content;
 };
 
 export default NavBar;

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ListingBody = ({ user, listing }: Props) => {
-  const { bathroomCount, description, guestCount, roomCount, reviews } =
+  const { bathroomCount, description, guestCount, roomCount, amenities } =
     listing;
   return (
     <section className="mt-6 flex justify-between gap-20 relative min-h-[60vh]">
@@ -21,7 +21,7 @@ const ListingBody = ({ user, listing }: Props) => {
         room={roomCount}
         userName={user.name || ""}
         desc={description}
-        reviews={reviews}
+        amenities={amenities}
       />
       <PaymentCard />
     </section>

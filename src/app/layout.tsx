@@ -9,6 +9,7 @@ import {
   ListingForm,
   Logister,
 } from "@/components";
+import MainContainer from "@/components/Container/MainContainer";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -42,8 +43,10 @@ export default async function RootLayout({
           <ListingForm user={logedInUser} />
           <Logister formVals={{ email: "", password: "", username: "" }} />
         </ClientOnley>
-        {/* @ts-expect-error Async Server Component  */}
-        <CategoryList />
+        <MainContainer>
+          {/* @ts-expect-error Async Server Component  */}
+          <CategoryList />
+        </MainContainer>
         {children}
       </body>
     </html>

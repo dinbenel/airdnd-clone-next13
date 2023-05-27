@@ -2,7 +2,6 @@
 import { categoryMap } from "@/constants/categoryMap";
 import { useCategory } from "@/store/CategoryStore";
 import { CategoryIcon } from "@prisma/client";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 type Props = {

@@ -1,8 +1,18 @@
 import { DBListing, ListingModel } from "@/Models/ListingModel";
 import { http } from "./apiService";
 
-const getAllListing = () => {
-  return http.get<DBListing[]>("/listing");
+const getAllListing = (filter: string) => {
+  const params = filter?.split(",").reduce((searchParams, curr, idx) => {
+    if (idx === 0) {
+      searchParams += curr;
+    } else {
+      searchParams += `%2C${curr}`;
+    }
+    return searchParams;
+  }, "");
+
+  const search = filter ? `?category=${params}` : "";
+  return http.get<DBListing[]>(`/listing${search}`);
 };
 
 const getListingById = (id: string) => {

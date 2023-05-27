@@ -1,14 +1,18 @@
 import { ListingPreview } from "@/components";
-import Map from "@/components/Map/Map";
-import { getAllCategories } from "@/services/categoryService";
 import { getAllListing } from "@/services/listingService";
 import { getLogedInUser } from "@/utils/getLogedInUser";
 import { Suspense } from "react";
-import { seedAmenities } from "../../prisma/seed";
+import MainContainer from "@/components/Container/MainContainer";
 
-export default async function Home() {
+type Props = {
+  searchParams: {
+    category: string;
+  };
+};
+
+export default async function Home({ searchParams }: Props) {
   const logedInUserPrm = getLogedInUser();
-  const listingsPrm = getAllListing();
+  const listingsPrm = getAllListing(searchParams.category);
 
   const [{ data: listings }, logedInUser] = await Promise.all([
     listingsPrm,
@@ -16,10 +20,12 @@ export default async function Home() {
   ]);
 
   return (
-    <main className="container h-[600px]">
-      <Suspense fallback={<>Loading</>}>
-        <ListingPreview listings={listings} user={logedInUser} />
-      </Suspense>
-    </main>
+    <MainContainer>
+      <main className="h-[600px]">
+        <Suspense fallback={<>Loading</>}>
+          <ListingPreview listings={listings} user={logedInUser} />
+        </Suspense>
+      </main>
+    </MainContainer>
   );
 }

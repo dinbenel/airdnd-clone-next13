@@ -57,7 +57,6 @@ export async function POST(req: IReq) {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const obj = Object.fromEntries(searchParams.entries());
   const id = searchParams.get("id");
   try {
     if (id) {
@@ -86,7 +85,21 @@ export async function GET(req: Request) {
       return NextResponse.json(listing);
     }
 
+    const obj = Object.fromEntries(searchParams.entries());
+    const filterBy = obj?.category?.split(",");
+    const where = filterBy
+      ? {
+          category: {
+            every: {
+              label: {
+                in: filterBy,
+              },
+            },
+          },
+        }
+      : {};
     const listings = await prisma?.listing.findMany({
+      where,
       include: {
         category: true,
         location: true,

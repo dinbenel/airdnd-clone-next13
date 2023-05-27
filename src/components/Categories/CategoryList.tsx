@@ -5,7 +5,7 @@ const CategoryList = async () => {
   const categories = await prisma?.category.findMany();
 
   return (
-    <section className="flex overflow-x-auto justify-between container mb-4">
+    <section className="flex overflow-x-auto justify-between mb-4">
       {categories?.map(({ label, id, icon }) => {
         return <CategoryCard key={id} label={label} icon={icon} />;
       })}
