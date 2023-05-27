@@ -5,13 +5,14 @@ import ListingReview from "./ListingReview";
 import Map from "@/components/Map/Map";
 import Image from "next/image";
 import Heading from "@/components/Heading/Heading";
+import { User } from "@prisma/client";
 
 type Props = {
   listing: DBListing;
-  //   user: User;
+  logedInUser: User;
 };
 
-const ListingDetails = ({ listing }: Props) => {
+const ListingDetails = ({ listing, logedInUser }: Props) => {
   const locationStr = String(listing.location?.latlng);
   const latLng = locationStr.split(",");
   const created = listing.user?.createdAt!;
@@ -26,7 +27,7 @@ const ListingDetails = ({ listing }: Props) => {
 
       <ListingBody user={listing.user!} listing={listing} />
       <hr className="mt-4" />
-      <ListingReview />
+      <ListingReview reviews={listing.reviews} logedInUser={logedInUser} />
       <hr className="my-4" />
 
       <section className=" ">

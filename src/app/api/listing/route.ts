@@ -69,6 +69,8 @@ export async function GET(req: Request) {
           category: true,
           location: true,
           likedBy: true,
+          amenities: true,
+          reviews: true,
           user: {
             select: {
               email: true,

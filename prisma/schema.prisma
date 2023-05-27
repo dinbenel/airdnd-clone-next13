@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,6 +8,8 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+
 
 model User {
   id            String    @id @default(cuid())
@@ -23,7 +26,9 @@ model User {
   accounts      Account[]
   sessions      Session[]
   listings      Listing[]
-
+  reviews       Review[]
+  orders        Order[]
+ 
   @@index([email])
 }
 
@@ -57,6 +62,22 @@ model Session {
   @@index([userId])
 }
 
+model Review {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  rating    Int      @default(1)
+  user      User     @relation(fields: [userId], references: [id])
+  listing   Listing  @relation(fields: [listingId], references: [id])
+  userId    String
+  listingId String
+
+  @@index([userId])
+  @@index([listingId])
+}
+
 model Listing {
   id            String   @id @default(cuid())
   bathroomCount Int
@@ -70,6 +91,8 @@ model Listing {
   title         String
   locationId    String
   userId        String
+  reviews       Review[]
+  orders        Order[]
 
   likedBy User[] @relation(name: "likeBy")
 
@@ -78,8 +101,23 @@ model Listing {
   category  Category[]
   amenities Amenitiy[]
 
-  @@index([userId, locationId])
+  @@index([userId])
   @@index([locationId])
+}
+
+model Order {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Float
+  listingId  String
+  listing    Listing  @relation(fields: [listingId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([listingId])
 }
 
 model Location {

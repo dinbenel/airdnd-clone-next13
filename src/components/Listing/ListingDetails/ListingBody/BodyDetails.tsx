@@ -1,5 +1,8 @@
 import Heading from "@/components/Heading/Heading";
+import DatePicker from "@/components/Input/DatePicker";
 import Image from "next/image";
+import ListingReview from "../ListingReview";
+import { Review } from "@prisma/client";
 
 type Props = {
   lastName: string;
@@ -9,6 +12,7 @@ type Props = {
   bath: number;
   guest: number;
   desc: string;
+  reviews: Review[];
 };
 
 const BodyDetails = ({
@@ -19,6 +23,7 @@ const BodyDetails = ({
   room,
   userName,
   desc,
+  reviews,
 }: Props) => {
   return (
     <div className="flex-1">
@@ -60,9 +65,9 @@ const BodyDetails = ({
       <hr className="mt-6" />
       <section>{desc}</section>
       <hr className="mt-6" />
-      <section>{/* TODO amenities */}</section>
-      <hr className="mt-6" />
-      <section>{/* TODO calendaer card */}</section>
+      <section>
+        <DatePicker />
+      </section>
     </div>
   );
 };

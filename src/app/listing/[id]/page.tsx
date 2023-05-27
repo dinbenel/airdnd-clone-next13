@@ -18,7 +18,7 @@ const page = async ({ params: { id } }: Props) => {
 
   return (
     <main className="max-w-[70%] mx-auto">
-      <ListingDetails listing={listing} />
+      <ListingDetails listing={listing} logedInUser={logedInUser} />
     </main>
   );
 };
