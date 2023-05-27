@@ -90,7 +90,7 @@ export async function GET(req: Request) {
     const where = filterBy
       ? {
           category: {
-            every: {
+            some: {
               label: {
                 in: filterBy,
               },

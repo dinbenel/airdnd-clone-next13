@@ -24,6 +24,7 @@ export default async function Home({ searchParams }: Props) {
       <main className="h-[600px]">
         <Suspense fallback={<>Loading</>}>
           <ListingPreview listings={listings} user={logedInUser} />
+          <div className="h-10"></div>
         </Suspense>
       </main>
     </MainContainer>

@@ -11,7 +11,6 @@ import PriceStep from "./PriceStep";
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 import { useListing } from "@/store/ListingStore";
 import { createListing } from "@/services/listingService";
-import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
 import { User } from "@prisma/client";
@@ -62,7 +61,7 @@ function ListingForm({ user }: { user?: User }) {
     setIsLoading(true);
     try {
       const data = await createListing(vals);
-      console.log(data);
+
       if (data) {
         onCloseModal();
       }

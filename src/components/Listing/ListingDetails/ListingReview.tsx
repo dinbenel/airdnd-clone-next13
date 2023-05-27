@@ -9,7 +9,6 @@ type Props = {
 };
 
 const ListingReview = ({ reviews, logedInUser }: Props) => {
-  console.log(reviews);
   return (
     <section className="min-h-[400px] flex flex-col items-center justify-center">
       {reviews.length ? (

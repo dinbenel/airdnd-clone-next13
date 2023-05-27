@@ -2,10 +2,7 @@
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { useListing } from "@/store/ListingStore";
-import { http } from "@/services/apiService";
 import { ListingModel } from "@/Models/ListingModel";
-import { useLogedInUser } from "@/store/UserStore";
 import { User } from "@prisma/client";
 import { getImageUrl, uploadImage } from "@/lib/fireBaseClient";
 import { AddPhotoSvg, ConfirmSvg, UndoSvg } from "../svg";
@@ -21,7 +18,6 @@ const ImageUpload = ({
   const [img, setImg] = useState<string>("");
   const [file, setFile] = useState<File>();
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const addImgSrc = useListing((state) => state.addImgSrc);
 
   const uploadFile = async ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (!target.files?.length) return;
@@ -38,14 +34,9 @@ const ImageUpload = ({
   const onConfirm = async () => {
     try {
       const _ = await uploadImage(`${user?.email}/${file?.name}`, file);
-      const url = await getImageUrl(`${user?.email}/`);
-      // http.post("/listingImg", file, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      setValue("imageSrc", url);
-      console.log(url);
+      const urls = await getImageUrl(`${user?.email}/`);
+      const url = urls.find((u) => u.includes(file?.name + ""));
+      setValue("imageSrc", url!);
     } catch (error) {
       console.log(error);
     }

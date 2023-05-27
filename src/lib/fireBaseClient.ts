@@ -31,5 +31,5 @@ export const getImageUrl = async (path: string) => {
   const imgListRef = ref(storage, path);
   const imageList = await listAll(imgListRef);
 
-  return getDownloadURL(imageList.items[0]);
+  return Promise.all(imageList.items.map((item) => getDownloadURL(item)));
 };

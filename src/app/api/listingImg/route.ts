@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     const file = body.get("file") as File;
 
     const imgUrl = await uploadImage(`${user?.user?.email}/ggg`, file);
-    console.log(imgUrl);
+
     return NextResponse.json("imgUrl");
   } catch (error) {
     console.log(error);
