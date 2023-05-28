@@ -6,6 +6,7 @@ import Map from "@/components/Map/Map";
 import Image from "next/image";
 import Heading from "@/components/Heading/Heading";
 import { User } from "@prisma/client";
+import UserAvatar from "@/components/UserMenu/UserAvatar";
 
 type Props = {
   listing: DBListing;
@@ -41,12 +42,12 @@ const ListingDetails = ({ listing, logedInUser }: Props) => {
       <section>
         <div className="flex w-full gap-4 items-center">
           <div>
-            <Image
-              alt=""
-              src={listing.user?.image || ""}
+            <UserAvatar
+              imgClassName=""
+              img={listing.user?.image}
               width={70}
               height={70}
-              className="rounded-full"
+              avatarClassName="text-5xl text-neutral-600"
             />
           </div>
           <Heading

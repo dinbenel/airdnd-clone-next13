@@ -1,5 +1,6 @@
 "use client";
 import { FormValues } from "@/Models/UserModel";
+import { HTMLInputTypeAttribute } from "react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 type Props = {
@@ -8,9 +9,17 @@ type Props = {
   label: string;
   register: UseFormRegister<FormValues>;
   errors: FieldErrors<FormValues>;
+  type?: HTMLInputTypeAttribute;
 };
 
-const Input = ({ id, required = true, label, register, errors }: Props) => {
+const Input = ({
+  id,
+  required = true,
+  label,
+  register,
+  errors,
+  type = "text",
+}: Props) => {
   return (
     <div className="flex flex-col mb-5">
       <label htmlFor={id} className="form-label">
@@ -18,7 +27,7 @@ const Input = ({ id, required = true, label, register, errors }: Props) => {
       </label>
       <input
         className="form-input"
-        type="text"
+        type={type}
         id={id}
         {...register(id, {
           required: {

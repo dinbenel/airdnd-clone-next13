@@ -6,6 +6,7 @@ import { User } from "@prisma/client";
 import { ReactNode, useState } from "react";
 import { MenuSvg, UserAvatarSvg } from "../svg";
 import Image from "next/image";
+import UserAvatar from "./UserAvatar";
 
 type Props = {
   children: ReactNode;
@@ -50,17 +51,7 @@ const UserMenu = ({ children, user }: Props) => {
           onClick={handleUserMenuOpen}
         >
           <MenuSvg className="text-gray-500" />
-          {user?.image ? (
-            <Image
-              src={user.image}
-              alt=""
-              width={25}
-              height={25}
-              className="rounded-full"
-            />
-          ) : (
-            <UserAvatarSvg className="text-gray-500 text-3xl" />
-          )}
+          <UserAvatar img={user?.image} imgClassName="" />
         </div>
 
         {isOpen && children}

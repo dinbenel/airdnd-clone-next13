@@ -33,3 +33,5 @@ export { default as FrigSvg } from "./refrigerator.svg";
 export { default as KitchenSvg } from "./kitchen.svg";
 export { default as SmokSvg } from "./smoking.svg";
 export { default as SmokNotSvg } from "./smokingnot.svg";
+export { default as PlusSvg } from "./add.svg";
+export { default as MinusSvg } from "./subtract.svg";

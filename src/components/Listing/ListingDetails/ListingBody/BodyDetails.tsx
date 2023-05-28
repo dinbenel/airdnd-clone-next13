@@ -3,6 +3,7 @@ import DatePicker from "@/components/Input/DatePicker";
 import Image from "next/image";
 import Amenities from "../Amenities";
 import { Amenitiy } from "@prisma/client";
+import UserAvatar from "@/components/UserMenu/UserAvatar";
 
 type Props = {
   lastName: string;
@@ -39,12 +40,19 @@ const BodyDetails = ({
           />
         </div>
         <div>
-          <Image
+          {/* <Image
             alt=""
             src={img || ""}
             height={50}
             width={50}
             className="rounded-full"
+          /> */}
+          <UserAvatar
+            imgClassName=""
+            img={img}
+            width={50}
+            height={50}
+            avatarClassName="text-5xl text-neutral-600"
           />
         </div>
       </section>

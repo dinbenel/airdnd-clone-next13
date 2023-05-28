@@ -4,7 +4,7 @@ import Button from "@/components/Button/Button";
 const PaymentCard = () => {
   return (
     <section className="relative w-1/3">
-      <section className="shadow-xl sticky top-0 p-4 w-full rounded-lg border-[1px]">
+      <section className="shadow-xl sticky top-14 p-4 w-full rounded-lg border-[1px]">
         <section className="flex justify-between">
           <p>459 night</p>
           <p>15 review</p>

@@ -10,7 +10,7 @@ const AppModal = ({ isOpen, children }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute flex inset-0 bg-black/60 items-center justify-center z-40">
+    <div className="absolute flex inset-0 bg-black/60 items-center justify-center z-40 h-[120vh] w-full">
       <div className="shadow border-[1px] bg-white rounded-lg min-w-[35%] relative">
         {children}
       </div>
