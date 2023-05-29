@@ -3,17 +3,16 @@ import ListingHead from "./ListingHead";
 import ListingBody from "./ListingBody/ListingBody";
 import ListingReview from "./ListingReview";
 import Map from "@/components/Map/Map";
-import Image from "next/image";
 import Heading from "@/components/Heading/Heading";
-import { User } from "@prisma/client";
 import UserAvatar from "@/components/UserMenu/UserAvatar";
+import AuthProvider from "@/context/AuthProvider";
+import { format } from "date-fns";
 
 type Props = {
   listing: DBListing;
-  logedInUser: User;
 };
 
-const ListingDetails = ({ listing, logedInUser }: Props) => {
+const ListingDetails = ({ listing }: Props) => {
   const locationStr = String(listing.location?.latlng);
   const latLng = locationStr.split(",");
   const created = listing.user?.createdAt!;
@@ -28,7 +27,10 @@ const ListingDetails = ({ listing, logedInUser }: Props) => {
 
       <ListingBody user={listing.user!} listing={listing} />
       <hr className="mt-4" />
-      <ListingReview reviews={listing.reviews} logedInUser={logedInUser} />
+      <AuthProvider>
+        <ListingReview reviews={listing.reviews} listingId={listing.id!} />
+      </AuthProvider>
+
       <hr className="my-4" />
 
       <section className=" ">
@@ -54,10 +56,10 @@ const ListingDetails = ({ listing, logedInUser }: Props) => {
             mainTitle={`hosted by ${listing.user?.name} ${
               listing.user?.lastName || ""
             }`}
-            subTitle={`joined in ${new Date(created)
-              .toUTCString()
-              .slice(4, 17)
-              .trim()}`}
+            subTitle={`joined in ${format(new Date(created), "MMM")} ${format(
+              new Date(created),
+              "yyyy"
+            )}`}
             containerClass="flex flex-col items-start"
           />
         </div>

@@ -1,6 +1,5 @@
 import Heading from "@/components/Heading/Heading";
 import DatePicker from "@/components/Input/DatePicker";
-import Image from "next/image";
 import Amenities from "../Amenities";
 import { Amenitiy } from "@prisma/client";
 import UserAvatar from "@/components/UserMenu/UserAvatar";
@@ -40,13 +39,6 @@ const BodyDetails = ({
           />
         </div>
         <div>
-          {/* <Image
-            alt=""
-            src={img || ""}
-            height={50}
-            width={50}
-            className="rounded-full"
-          /> */}
           <UserAvatar
             imgClassName=""
             img={img}

@@ -10,6 +10,7 @@ import {
   Logister,
 } from "@/components";
 import MainContainer from "@/components/Container/MainContainer";
+import ReviewForm from "@/components/ReviewForm/ReviewForm";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default async function RootLayout({
           <CategoryList />
         </MainContainer>
         <ClientOnley>
+          <ReviewForm />
           <ListingForm user={logedInUser} />
           <Logister formVals={{ email: "", password: "", username: "" }} />
         </ClientOnley>

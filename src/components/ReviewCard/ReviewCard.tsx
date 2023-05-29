@@ -1,4 +1,5 @@
 import { Review } from "@prisma/client";
+import UserAvatar from "../UserMenu/UserAvatar";
 
 type Props = {
   review: Review;
@@ -7,7 +8,7 @@ type Props = {
 const ReviewCard = ({ review }: Props) => {
   return (
     <div>
-      <div></div>
+      <UserAvatar img={""} imgClassName="" />
       <h3>{review.title}</h3>
       <p>{review.body}</p>
     </div>

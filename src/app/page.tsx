@@ -12,7 +12,7 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const logedInUserPrm = getLogedInUser();
-  const listingsPrm = getAllListing(searchParams.category);
+  const listingsPrm = getAllListing(searchParams?.category || "");
 
   const [{ data: listings }, logedInUser] = await Promise.all([
     listingsPrm,

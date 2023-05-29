@@ -69,7 +69,11 @@ export async function GET(req: Request) {
           location: true,
           likedBy: true,
           amenities: true,
-          reviews: true,
+          reviews: {
+            include: {
+              user: true,
+            },
+          },
           user: {
             select: {
               email: true,
