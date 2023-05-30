@@ -4,7 +4,7 @@ import prisma from "@/lib/prismaClient";
 
 export async function GET(_: Request) {
   try {
-    const categories = prisma && (await prisma.category.findMany());
+    const categories = await prisma?.category.findMany();
     if (!categories?.length) NextResponse.json({ msg: "no found" });
     return NextResponse.json(categories);
   } catch (error) {

@@ -1,4 +1,4 @@
-import { Review } from "@prisma/client";
+import { Review, User } from "@prisma/client";
 import UserAvatar from "../UserMenu/UserAvatar";
 
 type Props = {

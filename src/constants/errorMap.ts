@@ -5,4 +5,5 @@ export const ErrorMap = {
   reqFailed: "request failed",
   notFound: "not found",
   uploadImg: "cant upload image, please try agian later",
+  emailExist: "email already exsist",
 };

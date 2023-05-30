@@ -1,5 +1,7 @@
 "use client";
+import AppToast from "@/context/AppToast";
 import { ReactNode, useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 
 const ClientOnley = ({ children }: { children: ReactNode }) => {
   const [hasMounted, setHasMounted] = useState(false);
@@ -10,7 +12,12 @@ const ClientOnley = ({ children }: { children: ReactNode }) => {
 
   if (!hasMounted) return null;
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <AppToast />
+    </>
+  );
 };
 
 export default ClientOnley;

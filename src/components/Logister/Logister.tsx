@@ -4,22 +4,25 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Input from "../Input/Input";
 import SocialButton from "./SocialButton";
-import { BeatLoader } from "react-spinners";
+
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
 import AppModal from "../AppModal/AppModal";
-import { FormValues } from "@/Models/UserModel";
+import { IUserForm } from "@/Models/UserModel";
 import { useLogister } from "@/store/LogisterStore";
 import { registerUser } from "@/services/userService";
 import Loader from "../Loader/Loader";
 import { ExitSvg } from "../svg";
+import { useToast } from "react-toastify";
+import { useAppToast } from "@/context/AppToast";
 
 type Props = {
-  formVals: FormValues;
+  formVals: IUserForm;
 };
 
 const Logister = ({ formVals }: Props) => {
   const { isOpen, type, onClose } = useLogister();
+  const toast = useAppToast();
   const [subTitle] = useState(
     type === "login" ? "log in with your acount" : "create an acount"
   );
@@ -30,35 +33,46 @@ const Logister = ({ formVals }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormValues>({
+  } = useForm<IUserForm>({
     defaultValues: formVals,
   });
 
-  const submitHandler: SubmitHandler<FormValues> = async (formInput) => {
+  const submitHandler: SubmitHandler<IUserForm> = async (formInput) => {
     setIsLoading(true);
     try {
       if (type === "register") {
-        const { data } = await registerUser(formInput);
-        await signIn("credentials", {
-          password: data.password,
-          email: data.email,
-        });
-        router.refresh();
-        onClose();
+        await registerUser(formInput);
+      }
+      signInHandler({ email: formInput.email, password: formInput.password });
+    } catch (error) {
+      //TODO toast
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  const signInHandler = async (formData: IUserForm) => {
+    try {
+      const res = await signIn("credentials", { ...formData, redirect: false });
+      console.log(res);
+      if (res?.error) {
+        toast.error(res.error);
+        setIsLoading(false);
         return;
       }
-
-      await signIn("credentials", {
-        ...formInput,
-      });
-      router.refresh();
-      onClose();
+      onCloseModal();
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
-      reset();
+      toast.error("ivalid credentials");
     }
+  };
+
+  const onCloseModal = () => {
+    toast.success("sucess");
+    setIsLoading(false);
+    reset();
+    onClose();
+    router.refresh();
   };
 
   const setLoading = (loading: boolean) => {

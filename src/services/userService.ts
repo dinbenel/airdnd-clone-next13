@@ -1,7 +1,7 @@
-import { FormValues, IUserForm } from "../Models/UserModel";
+import { IUserForm } from "../Models/UserModel";
 import { http } from "./apiService";
 
-const registerUser = (userInfo: FormValues) => {
+const registerUser = (userInfo: IUserForm) => {
   return http.post<IUserForm>("/register", userInfo);
 };
 

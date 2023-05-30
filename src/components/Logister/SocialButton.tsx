@@ -21,6 +21,20 @@ type Props = {
 };
 
 const SocialButton = ({ isLoading, setLoading }: Props) => {
+  const onSignIn = async (provider: string) => {
+    setLoading(true);
+    try {
+      const res = await signIn(provider);
+      if (res?.error) {
+        //TODO toast
+        return;
+      }
+    } catch (error) {
+      //TODO toast
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {socialBtns.map(({ provider, Icon }) => {
@@ -32,16 +46,7 @@ const SocialButton = ({ isLoading, setLoading }: Props) => {
             className={`btn btn-social ${
               isLoading ? "disabled" : ""
             } mt-4 relative`}
-            onClick={() => {
-              setLoading(true);
-              signIn(provider)
-                .then(() => {
-                  //TODO popup message
-                  setLoading(false);
-                })
-                .catch(console.log)
-                .finally(() => setLoading(false));
-            }}
+            onClick={() => onSignIn(provider)}
           >
             {`continue with ${provider}`}
             <Icon className="absolute top-2 text-xl" />

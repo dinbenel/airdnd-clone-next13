@@ -1,6 +1,6 @@
 export interface IUserForm {
   email: string;
-  username: string;
+  username?: string;
   password: string;
 }
 

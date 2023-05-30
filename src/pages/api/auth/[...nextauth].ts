@@ -3,8 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentioalsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { AdapterUser } from "next-auth/adapters";
-import { User } from "@prisma/client";
+import { compare } from "bcrypt";
 import { ErrorMap } from "@/constants/errorMap";
 import prisma from "../../../lib/prismaClient";
 
@@ -25,19 +24,37 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials?.password) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error(ErrorMap.invalidCreds);
+          }
+
+          const user = await prisma?.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+            include: {
+              accounts: true,
+            },
+          });
+          //logen in withe different provider
+          if (user && !user.password) {
+            throw new Error(ErrorMap.emailExist);
+          }
+
+          if (user && user.password) {
+            const isMatch = await compare(credentials.password, user.password);
+
+            if (isMatch) {
+              return user;
+            }
+            // throw new Error(ErrorMap.invalidCreds);
+            return null;
+          }
+          return null;
+        } catch (error) {
           throw new Error(ErrorMap.invalidCreds);
         }
-
-        const user = await prisma?.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-        if (user) {
-          return user;
-        }
-        return null;
       },
     }),
   ],
@@ -47,21 +64,23 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, user, token }) {
-      const dbUser = await prisma?.user.findUnique({
-        where: {
-          email: token.email as string,
-        },
-        select: {
-          email: true,
-          id: true,
-          accounts: true,
-          name: true,
-          image: true,
-          role: true,
-        },
-      });
+      console.log("first");
+      console.log({ session, user, token });
+      // const dbUser = await prisma?.user.findUnique({
+      //   where: {
+      //     email: token.email as string,
+      //   },
+      //   select: {
+      //     email: true,
+      //     id: true,
+      //     accounts: true,
+      //     name: true,
+      //     image: true,
+      //     role: true,
+      //   },
+      // });
 
-      session.user = dbUser as Partial<User> | AdapterUser;
+      // session.user = dbUser as Partial<User> | AdapterUser;
       return session;
     },
   },
