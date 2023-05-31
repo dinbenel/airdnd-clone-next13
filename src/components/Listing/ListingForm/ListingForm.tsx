@@ -16,11 +16,14 @@ import { ListingModel } from "@/Models/ListingModel";
 import { User } from "@prisma/client";
 import { ExitSvg } from "@/components/svg";
 import Loader from "@/components/Loader/Loader";
+import { useAppToast } from "@/context/AppToast";
+import { toastMsgsMap } from "@/constants/toastMsgMap";
 
 function ListingForm({ user }: { user?: User }) {
   const { isOpen, onClose, resetListing } = useListing();
   const [activStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const toast = useAppToast();
   const router = useRouter();
 
   const methods = useForm<Omit<ListingModel<string[]>, "user">>({
@@ -63,9 +66,11 @@ function ListingForm({ user }: { user?: User }) {
       const data = await createListing(vals);
 
       if (data) {
+        toast.success(toastMsgsMap.listingSuccess);
         onCloseModal();
       }
     } catch (error) {
+      toast.success(`${error}`);
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -73,11 +78,13 @@ function ListingForm({ user }: { user?: User }) {
   };
 
   const onCloseModal = () => {
-    onClose();
-    setActiveStep(0);
-    resetListing();
-    reset();
-    router.refresh();
+    setTimeout(() => {
+      onClose();
+      setActiveStep(0);
+      resetListing();
+      reset();
+      router.refresh();
+    }, 3500);
   };
 
   const onNext = async () => {

@@ -18,6 +18,7 @@ const StarRating = () => {
         onChange={(event, newValue) => {
           setValue("rating", newValue || 0);
         }}
+        style={{ color: "#f43f5e" }}
       />
     </div>
   );

@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { GithubSvg, GoogleSvg } from "../svg";
 import { ReactNode } from "react";
+import { useAppToast } from "@/context/AppToast";
 
 const socialBtns = [
   {
@@ -18,19 +19,24 @@ const socialBtns = [
 type Props = {
   isLoading: boolean;
   setLoading: (loading: boolean) => void;
+  onCloseModal: () => void;
 };
 
-const SocialButton = ({ isLoading, setLoading }: Props) => {
+const SocialButton = ({ isLoading, setLoading, onCloseModal }: Props) => {
+  const toast = useAppToast();
+
   const onSignIn = async (provider: string) => {
     setLoading(true);
     try {
-      const res = await signIn(provider);
+      const res = await signIn(provider, { redirect: false });
       if (res?.error) {
-        //TODO toast
+        toast.error(`${res.error}`);
         return;
       }
+      toast.success(`loged in with ${provider}`);
+      onCloseModal();
     } catch (error) {
-      //TODO toast
+      toast.error(`cant login with ${provider}`);
       console.log(error);
     }
   };

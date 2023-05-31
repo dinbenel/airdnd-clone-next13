@@ -1,6 +1,6 @@
 "use client";
 import { useReview } from "@/store/ReviewStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -8,9 +8,16 @@ import { ExitSvg } from "../svg";
 import StarRating from "../Input/RatingStar";
 import { ReviewInput } from "@/Models/ReviewModel";
 import { createReview } from "@/services/reviewService";
+import { useRouter } from "next/navigation";
+import { useAppToast } from "@/context/AppToast";
+import { toastMsgsMap } from "@/constants/toastMsgMap";
+import Loader from "../Loader/Loader";
 
 const ReviewForm = () => {
   const { isOpen, onClose, listingId } = useReview();
+  const toast = useAppToast();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const methods = useForm<ReviewInput>({
     defaultValues: {
       body: "",
@@ -29,12 +36,29 @@ const ReviewForm = () => {
   if (!isOpen) return null;
 
   const onSubmit: SubmitHandler<ReviewInput> = async (data) => {
-    await createReview({ ...data, listingId });
+    setIsLoading(true);
+    try {
+      await createReview({ ...data, listingId });
+      toast.success(toastMsgsMap.reviewSucess);
+      onReset();
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      toast.error(toastMsgsMap.invalid);
+    }
+  };
+
+  const onReset = () => {
+    setTimeout(() => {
+      setIsLoading(false);
+      reset();
+      onCloseModal();
+      router.refresh();
+    }, 3500);
   };
 
   const onCloseModal = () => {
     onClose();
-    reset();
   };
 
   return (
@@ -89,6 +113,7 @@ const ReviewForm = () => {
               className="border-[2px] rounded-lg p-2 w-[70%] text-neutral-800 font-semibold hover:bg-slate-900 hover:border-white hover:text-neutral-100 cursor-pointer transition ease-in-out duration-300 outline-none"
               title="submit"
             />
+            <Loader isLoading={isLoading} size={30} />
           </form>
         </FormProvider>
       </div>

@@ -4,7 +4,6 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Input from "../Input/Input";
 import SocialButton from "./SocialButton";
-
 import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
 import AppModal from "../AppModal/AppModal";
@@ -13,8 +12,8 @@ import { useLogister } from "@/store/LogisterStore";
 import { registerUser } from "@/services/userService";
 import Loader from "../Loader/Loader";
 import { ExitSvg } from "../svg";
-import { useToast } from "react-toastify";
 import { useAppToast } from "@/context/AppToast";
+import { toastMsgsMap } from "@/constants/toastMsgMap";
 
 type Props = {
   formVals: IUserForm;
@@ -45,7 +44,7 @@ const Logister = ({ formVals }: Props) => {
       }
       signInHandler({ email: formInput.email, password: formInput.password });
     } catch (error) {
-      //TODO toast
+      toast.error("ivalid credentials");
       console.log(error);
       setIsLoading(false);
     }
@@ -54,25 +53,27 @@ const Logister = ({ formVals }: Props) => {
   const signInHandler = async (formData: IUserForm) => {
     try {
       const res = await signIn("credentials", { ...formData, redirect: false });
-      console.log(res);
+
       if (res?.error) {
         toast.error(res.error);
         setIsLoading(false);
         return;
       }
+      toast.success(`${formData.email} is now loged in`);
       onCloseModal();
     } catch (error) {
       console.log(error);
-      toast.error("ivalid credentials");
+      toast.error(toastMsgsMap.ivalidCreds);
     }
   };
 
   const onCloseModal = () => {
-    toast.success("sucess");
-    setIsLoading(false);
-    reset();
-    onClose();
-    router.refresh();
+    setTimeout(() => {
+      setIsLoading(false);
+      reset();
+      onClose();
+      router.refresh();
+    }, 3500);
   };
 
   const setLoading = (loading: boolean) => {
@@ -131,7 +132,11 @@ const Logister = ({ formVals }: Props) => {
             <span className="text-base text-gray-400">or</span>
             <div className=" bg-slate-200/50 h-[2px] w-[47%]"></div>
           </div>
-          <SocialButton isLoading={isLoading} setLoading={setLoading} />
+          <SocialButton
+            isLoading={isLoading}
+            setLoading={setLoading}
+            onCloseModal={onCloseModal}
+          />
           <Loader isLoading={isLoading} size={15} />
         </form>
       </div>

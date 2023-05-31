@@ -10,12 +10,13 @@ export async function POST(req: Request) {
     const user = await getLogedInUser();
 
     if (!body || !listingId || !title) throw new Error(ErrorMap.invalidInput);
+    const flotRating = parseFloat(Number(rating).toFixed(1));
 
     await prisma?.review.create({
       data: {
         body,
         title,
-        rating,
+        rating: flotRating,
         listing: {
           connect: {
             id: listingId,

@@ -6,6 +6,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
 import { ErrorMap } from "@/constants/errorMap";
 import prisma from "../../../lib/prismaClient";
+import { AdapterUser } from "next-auth/adapters";
+import { User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -66,21 +68,21 @@ export const authOptions: AuthOptions = {
     async session({ session, user, token }) {
       console.log("first");
       console.log({ session, user, token });
-      // const dbUser = await prisma?.user.findUnique({
-      //   where: {
-      //     email: token.email as string,
-      //   },
-      //   select: {
-      //     email: true,
-      //     id: true,
-      //     accounts: true,
-      //     name: true,
-      //     image: true,
-      //     role: true,
-      //   },
-      // });
+      const dbUser = await prisma?.user.findUnique({
+        where: {
+          email: token.email as string,
+        },
+        select: {
+          email: true,
+          id: true,
+          accounts: true,
+          name: true,
+          image: true,
+          role: true,
+        },
+      });
 
-      // session.user = dbUser as Partial<User> | AdapterUser;
+      session.user = dbUser as Partial<User> | AdapterUser;
       return session;
     },
   },
