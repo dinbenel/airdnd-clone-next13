@@ -1,3 +1,4 @@
+import AppToast from "@/context/AppToast";
 import { ReactNode } from "react";
 
 export const metadata = {
@@ -18,5 +19,10 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  return <section className="">{children}</section>;
+  return (
+    <section className="">
+      {children}
+      <AppToast />
+    </section>
+  );
 }

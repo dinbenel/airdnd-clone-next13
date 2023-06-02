@@ -3,9 +3,10 @@ import React, { HTMLAttributes } from "react";
 type Props = {
   disabled?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
+  Icon?: any;
 } & HTMLAttributes<HTMLButtonElement>;
 
-function Button({ title, disabled, className, type, ...props }: Props) {
+function Button({ Icon, title, disabled, className, type, ...props }: Props) {
   return (
     <button
       {...props}
@@ -14,6 +15,7 @@ function Button({ title, disabled, className, type, ...props }: Props) {
       className={`mt-4  ${className} ${disabled ? "disabled" : ""} btn`}
     >
       {title}
+      {Icon && <Icon />}
     </button>
   );
 }

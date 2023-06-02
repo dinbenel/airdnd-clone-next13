@@ -35,3 +35,5 @@ export { default as SmokSvg } from "./smoking.svg";
 export { default as SmokNotSvg } from "./smokingnot.svg";
 export { default as PlusSvg } from "./add.svg";
 export { default as MinusSvg } from "./subtract.svg";
+export { default as DeleteSvg } from "./delete.svg";
+export { default as EditSvg } from "./edit.svg";

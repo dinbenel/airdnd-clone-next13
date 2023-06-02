@@ -36,3 +36,19 @@ export async function POST(req: Request) {
     throw new Error(ErrorMap.invalidInput);
   }
 }
+
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("reviewId") as string;
+  try {
+    await prisma?.review.delete({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json("review deleted successfully!");
+  } catch (error) {
+    console.log(error);
+    throw new Error("cant delete review");
+  }
+}

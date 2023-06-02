@@ -7,9 +7,10 @@ import { compare } from "bcrypt";
 import { ErrorMap } from "@/constants/errorMap";
 import prisma from "../../../lib/prismaClient";
 import { AdapterUser } from "next-auth/adapters";
-import { User } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
+  adapter: PrismaAdapter(prisma as PrismaClient),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
@@ -86,7 +87,6 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
-  adapter: PrismaAdapter(prisma as any),
 
   pages: {
     signIn: "/",

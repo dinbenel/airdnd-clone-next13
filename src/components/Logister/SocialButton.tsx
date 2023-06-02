@@ -2,7 +2,6 @@
 
 import { signIn } from "next-auth/react";
 import { GithubSvg, GoogleSvg } from "../svg";
-import { ReactNode } from "react";
 import { useAppToast } from "@/context/AppToast";
 
 const socialBtns = [

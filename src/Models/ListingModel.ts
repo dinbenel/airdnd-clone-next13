@@ -1,5 +1,6 @@
 import { Amenitiy, Category, Review, User } from "@prisma/client";
 import { Country } from "../hooks/useCountries";
+import { DbReview } from "./ReviewModel";
 
 export interface ListingModel<T> {
   id?: string;
@@ -22,6 +23,6 @@ interface ICountry extends Country {
 export interface DBListing extends Omit<ListingModel<string[]>, "category"> {
   category: Category[];
   likedBy?: User[];
-  reviews: Review[];
+  reviews: DbReview[];
   amenities: Amenitiy[];
 }
