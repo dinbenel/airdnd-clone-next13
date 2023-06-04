@@ -2,7 +2,7 @@
 import { DBListing } from "@/Models/ListingModel";
 import HeartButton from "@/components/Button/HeartButton";
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ListingCard = ({

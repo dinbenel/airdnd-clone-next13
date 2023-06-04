@@ -2,9 +2,6 @@
 import Map from "@/components/Map/Map";
 import Heading from "../../Heading/Heading";
 import CountrySelect from "../../Input/CountrySelect";
-import { useListing } from "@/store/ListingStore";
-import { ViewState } from "react-map-gl";
-import { useState } from "react";
 
 type Props = {};
 

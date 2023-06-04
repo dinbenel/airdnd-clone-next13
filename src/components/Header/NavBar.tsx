@@ -6,7 +6,7 @@ import UserMenuItem from "../UserMenu/UserMenuItem";
 import GuestMenuItem from "../UserMenu/GuestMenuItem";
 import { User } from "@prisma/client";
 import MainContainer from "../Container/MainContainer";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import SecondaryContainer from "../Container/SecondaryContainer";
 import { useEffect } from "react";
 

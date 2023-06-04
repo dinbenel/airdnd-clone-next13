@@ -1,6 +1,5 @@
 import { ListingDetails } from "@/components";
 import { getListingById } from "@/services/listingService";
-import { getLogedInUser } from "@/utils/getLogedInUser";
 
 type Props = {
   params: {
@@ -10,15 +9,12 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => {
   const dataPrm = getListingById(id);
-  const userPrm = getLogedInUser();
-  const [logedInUser, { data: listing }] = await Promise.all([
-    userPrm,
-    dataPrm,
-  ]);
+
+  const [{ data: listing }] = await Promise.all([dataPrm]);
 
   return (
     <main className="max-w-[70%] mx-auto">
-      <ListingDetails listing={listing} logedInUser={logedInUser} />
+      <ListingDetails listing={listing} />
       <div className="h-10"></div>
     </main>
   );

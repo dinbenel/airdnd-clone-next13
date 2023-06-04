@@ -15,7 +15,7 @@ const PaymentCard = () => {
             title="reserve"
             className="bg-gradient-to-r from-rose-500 via-rose-700 to-rose-900 text-white w-full text-xl mb-2"
           />
-          <p>You won't be charged yet</p>
+          <p>{`You won't be charged yet`}</p>
           <section className="flex justify-between w-full mt-4 items-center">
             <p>459 * 5 nights</p>
             <p>4794</p>

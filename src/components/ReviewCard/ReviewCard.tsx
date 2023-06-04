@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import Button from "../Button/Button";
 import { DeleteSvg, EditSvg } from "../svg";
 import { User } from "@prisma/client";
-import { http } from "@/services/apiService";
 import { deleteReview } from "@/services/reviewService";
 import { useRouter } from "next/navigation";
 import { useAppToast } from "@/context/AppToast";

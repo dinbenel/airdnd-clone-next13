@@ -1,5 +1,5 @@
+"use client";
 import { useLogister } from "@/store/LogisterStore";
-import Link from "next/link";
 
 const GuestMenuItem = () => {
   const { onOpen, setType } = useLogister();

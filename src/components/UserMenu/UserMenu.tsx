@@ -4,8 +4,7 @@ import { useListing } from "@/store/ListingStore";
 import { useLogister } from "@/store/LogisterStore";
 import { User } from "@prisma/client";
 import { ReactNode, useState } from "react";
-import { MenuSvg, UserAvatarSvg } from "../svg";
-import Image from "next/image";
+import { MenuSvg } from "../svg";
 import UserAvatar from "./UserAvatar";
 
 type Props = {

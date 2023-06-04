@@ -1,3 +1,4 @@
+"use client";
 import ListingCounter from "./ListingCounter";
 import { useFormContext } from "react-hook-form";
 import { useListing } from "@/store/ListingStore";

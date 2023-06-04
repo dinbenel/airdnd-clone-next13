@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 const MainContainer = ({ children }: { children: ReactElement }) => {
   return <div className={`max-w-[85%] mx-auto relative`}>{children}</div>;

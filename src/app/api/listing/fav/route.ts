@@ -26,7 +26,6 @@ export async function PUT(req: IReq) {
 
     return NextResponse.json(`listing ${body.listingId} updated successfully`);
   } catch (error) {
-    console.log(error);
     throw new Error(ErrorMap.notFound);
   }
 }

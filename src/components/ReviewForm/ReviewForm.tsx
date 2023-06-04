@@ -1,7 +1,6 @@
 "use client";
 import { useReview } from "@/store/ReviewStore";
-import { useEffect, useState } from "react";
-import Input from "../Input/Input";
+import { useState } from "react";
 import Button from "../Button/Button";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { ExitSvg } from "../svg";

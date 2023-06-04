@@ -50,7 +50,6 @@ export async function POST(req: IReq) {
 
     return NextResponse.json(`listing ${res!.id} created successfully`);
   } catch (error) {
-    console.log(error);
     throw new Error(ErrorMap.notFound);
   }
 }
@@ -139,7 +138,6 @@ export async function DELETE(req: IReq) {
     });
     return NextResponse.json(`listing ${body.id} was deleted successfully`);
   } catch (error) {
-    console.log(error);
     throw new Error(ErrorMap.invalidInput);
   }
 }
@@ -186,7 +184,6 @@ export async function PUT(req: IReq) {
     });
     return NextResponse.json(`listing ${data.id} updated successfully`);
   } catch (error) {
-    console.log(error);
     throw new Error(ErrorMap.invalidInput);
   }
 }
