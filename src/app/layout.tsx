@@ -16,6 +16,7 @@ const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
 });
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "airDnD",
   description: "airbnb clone using nextjs 13",

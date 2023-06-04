@@ -6,7 +6,7 @@ type Props = {
     id: string;
   };
 };
-
+export const dynamic = "force-dynamic";
 const page = async ({ params: { id } }: Props) => {
   const dataPrm = getListingById(id);
 
