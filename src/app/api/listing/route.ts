@@ -187,3 +187,5 @@ export async function PUT(req: IReq) {
     throw new Error(ErrorMap.invalidInput);
   }
 }
+
+export const dynamic = "force-dynamic";
