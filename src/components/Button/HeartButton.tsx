@@ -1,6 +1,6 @@
 "use client";
 import { http } from "@/services/apiService";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { HeartFillSvg, HeartSvg } from "../svg";
 
 type Props = {
@@ -12,8 +12,10 @@ type Props = {
 const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
   const [isLiked, setIsLiked] = useState(listingLikedBy.includes(userId));
 
-  const toglleFav = (action: "like" | "disLike") => {
+  const toglleFav = (ev: MouseEvent, action: "like" | "disLike") => {
+    ev.stopPropagation();
     if (!userId) return;
+
     setIsLiked((prev) => {
       const likes = handleUserFavs(action);
       http.put("/listing/fav", { userIds: likes, listingId });
@@ -34,8 +36,8 @@ const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
 
   return (
     <div
-      className="relative"
-      onClick={() => toglleFav(!isLiked ? "like" : "disLike")}
+      className="relative z-20"
+      onClick={(ev) => toglleFav(ev, !isLiked ? "like" : "disLike")}
     >
       <HeartSvg className="absolute text-3xl  fill-white right-0" />
       <HeartFillSvg

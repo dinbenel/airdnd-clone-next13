@@ -3,7 +3,7 @@ import { DBListing } from "@/Models/ListingModel";
 import HeartButton from "@/components/Button/HeartButton";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { MouseEvent } from "react";
 
 const ListingCard = ({
   listing,
@@ -18,7 +18,8 @@ const ListingCard = ({
     return acc;
   }, [] as string[]);
 
-  const onSelectListing = () => {
+  const onSelectListing = (ev: MouseEvent<HTMLElement>) => {
+    ev.stopPropagation();
     router.push(`/listing/${listing.id}`);
   };
 
