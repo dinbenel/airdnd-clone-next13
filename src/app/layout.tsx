@@ -8,9 +8,9 @@ import {
   Header,
   ListingForm,
   Logister,
+  MainContainer,
+  ReviewForm,
 } from "@/components";
-import MainContainer from "@/components/Container/MainContainer";
-import ReviewForm from "@/components/ReviewForm/ReviewForm";
 
 const nunito = Nunito({
   subsets: ["latin"],

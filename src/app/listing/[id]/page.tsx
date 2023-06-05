@@ -1,5 +1,5 @@
 import { ListingDetails } from "@/components";
-import { getListingById } from "@/services/listingService";
+import { getAllListing, getListingById } from "@/services/listingService";
 
 type Props = {
   params: {
@@ -21,3 +21,8 @@ const page = async ({ params: { id } }: Props) => {
 };
 
 export default page;
+
+export async function generateStaticParams() {
+  const { data: listings } = await getAllListing("");
+  return listings.map((lis) => ({ id: lis.id }));
+}

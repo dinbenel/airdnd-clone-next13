@@ -1,8 +1,7 @@
-import { ListingPreview } from "@/components";
+import { ListingPreview, Loader, MainContainer } from "@/components";
 import { getAllListing } from "@/services/listingService";
 import { getLogedInUser } from "@/utils/getLogedInUser";
 import { Suspense } from "react";
-import MainContainer from "@/components/Container/MainContainer";
 
 type Props = {
   searchParams: {
@@ -24,7 +23,7 @@ export default async function Home({ searchParams }: Props) {
   return (
     <MainContainer>
       <main className="min-h-[600px]">
-        <Suspense fallback={<>Loading</>}>
+        <Suspense fallback={<Loader isLoading={true} size={30} />}>
           <ListingPreview listings={listings} user={logedInUser} />
           <div className="h-10"></div>
         </Suspense>
