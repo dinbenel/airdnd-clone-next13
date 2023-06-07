@@ -7,6 +7,7 @@ import Heading from "@/components/Heading/Heading";
 import UserAvatar from "@/components/UserMenu/UserAvatar";
 import AuthProvider from "@/context/AuthProvider";
 import { format } from "date-fns";
+import ClientOnley from "@/components/ClientOnley/ClientOnley";
 
 type Props = {
   listing: DBListing;
@@ -27,19 +28,23 @@ const ListingDetails = ({ listing }: Props) => {
 
       <ListingBody user={listing.user!} listing={listing} />
       <hr className="mt-4" />
-      <AuthProvider>
-        <ListingReview reviews={listing.reviews} listingId={listing.id!} />
-      </AuthProvider>
+      <ClientOnley>
+        <AuthProvider>
+          <ListingReview reviews={listing.reviews} listingId={listing.id!} />
+        </AuthProvider>
 
-      <hr className="my-4" />
+        <hr className="my-4" />
 
-      <section className=" ">
-        <h3 className="font-semibold mb-4 text-2xl">Where you’ll be</h3>
-        <div className="relative h-96">
-          <Map viewportVal={latLng.map((v) => Number(v)) as [number, number]} />
-        </div>
-        <p className="mt-2 text-lg font-medium">{`${listing.location?.region}, ${listing.location?.label}`}</p>
-      </section>
+        <section className=" ">
+          <h3 className="font-semibold mb-4 text-2xl">Where you’ll be</h3>
+          <div className="relative h-96">
+            <Map
+              viewportVal={latLng.map((v) => Number(v)) as [number, number]}
+            />
+          </div>
+          <p className="mt-2 text-lg font-medium">{`${listing.location?.region}, ${listing.location?.label}`}</p>
+        </section>
+      </ClientOnley>
       <hr className="my-4" />
       <section>
         <div className="flex w-full gap-4 items-center">

@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import PaymentCard from "../PaymentCard";
 import BodyDetails from "./BodyDetails";
 import { DBListing } from "@/Models/ListingModel";
+import ClientOnley from "@/components/ClientOnley/ClientOnley";
 
 type Props = {
   user: User;
@@ -9,8 +10,14 @@ type Props = {
 };
 
 const ListingBody = ({ user, listing }: Props) => {
-  const { bathroomCount, description, guestCount, roomCount, amenities } =
-    listing;
+  const {
+    bathroomCount,
+    description,
+    guestCount,
+    roomCount,
+    amenities,
+    price,
+  } = listing;
   return (
     <section className="mt-6 flex justify-between gap-20 relative min-h-[60vh]">
       <BodyDetails
@@ -23,7 +30,9 @@ const ListingBody = ({ user, listing }: Props) => {
         desc={description}
         amenities={amenities}
       />
-      <PaymentCard />
+      <ClientOnley>
+        <PaymentCard price={price} />
+      </ClientOnley>
     </section>
   );
 };

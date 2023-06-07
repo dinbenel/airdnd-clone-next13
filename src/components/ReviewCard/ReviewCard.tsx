@@ -38,7 +38,7 @@ const ReviewCard = ({ review }: Props) => {
 
   return (
     <div className="flex gap-2 items-start justify-between p-2 w-full">
-      <UserAvatar img={review.user.image || ""} imgClassName="h-16 w-16" />
+      <UserAvatar img={review.user.image || ""} imgClassName="h-11 w-11" />
       <div className="flex flex-col flex-1">
         <h3 className="ms-1 text-xl font-semibold text-neutral-800">
           {review.title}

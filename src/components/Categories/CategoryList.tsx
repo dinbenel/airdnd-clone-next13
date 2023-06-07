@@ -1,7 +1,7 @@
 import CategoryCard from "./CategoryCard";
 import prisma from "../../lib/prismaClient";
 
-const CategoryList = async () => {
+const CategoryList = async (props: any) => {
   const categories = await prisma?.category.findMany();
 
   return (
