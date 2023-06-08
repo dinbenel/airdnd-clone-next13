@@ -23,5 +23,3 @@ export async function POST(req: Request) {
     throw new Error(ErrorMap.invalidCreds);
   }
 }
-
-export const dynamic = "force-dynamic";

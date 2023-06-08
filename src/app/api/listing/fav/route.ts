@@ -29,5 +29,3 @@ export async function PUT(req: IReq) {
     throw new Error(ErrorMap.notFound);
   }
 }
-
-export const dynamic = "force-dynamic";

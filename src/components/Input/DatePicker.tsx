@@ -2,19 +2,15 @@
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker, RangeKeyDict } from "react-date-range";
-import { useState } from "react";
+import { useCalendar } from "@/store/CalendarStore";
 
 const DatePicker = () => {
-  const [range, setRange] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-  });
+  const { range, setRange } = useCalendar();
 
   const onSelectRange = (rangeKey: RangeKeyDict) => {
-    setRange({
-      startDate: rangeKey.Selection.startDate || new Date(),
-      endDate: rangeKey.Selection.endDate || new Date(),
-    });
+    const startDate = rangeKey.Selection.startDate || new Date();
+    const endDate = rangeKey.Selection.endDate || new Date();
+    setRange(startDate, endDate);
   };
 
   return (

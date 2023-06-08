@@ -52,5 +52,3 @@ export async function DELETE(req: Request) {
     throw new Error("cant delete review");
   }
 }
-
-export const dynamic = "force-dynamic";

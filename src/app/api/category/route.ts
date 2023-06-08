@@ -11,5 +11,3 @@ export async function GET(_: Request) {
     throw new Error(ErrorMap.notFound);
   }
 }
-
-export const dynamic = "force-dynamic";

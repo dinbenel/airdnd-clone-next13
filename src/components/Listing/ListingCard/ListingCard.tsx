@@ -1,6 +1,7 @@
 "use client";
 import { DBListing } from "@/Models/ListingModel";
 import HeartButton from "@/components/Button/HeartButton";
+import { currencyFormat } from "@/utils/formattCurrency";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
@@ -56,7 +57,9 @@ const ListingCard = ({
           </p>
         ))}
       </section>
-      <p className="font-bold text-lg text-slate-700">${listing.price} night</p>
+      <p className="font-bold text-lg text-slate-700">
+        {currencyFormat(listing.price)} night
+      </p>
     </article>
   );
 };

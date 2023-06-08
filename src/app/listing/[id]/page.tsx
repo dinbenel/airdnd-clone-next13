@@ -6,7 +6,7 @@ type Props = {
     id: string;
   };
 };
-export const dynamic = "force-dynamic";
+
 const page = async ({ params: { id } }: Props) => {
   const dataPrm = getListingById(id);
 
@@ -22,7 +22,7 @@ const page = async ({ params: { id } }: Props) => {
 
 export default page;
 
-export async function generateStaticParams() {
-  const { data: listings } = await getAllListing("");
-  return listings.map((lis) => ({ id: lis.id }));
-}
+// export async function generateStaticParams() {
+//   const { data: listings } = await getAllListing("");
+//   return listings.map((lis) => ({ id: lis.id }));
+// }
