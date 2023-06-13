@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Category } from "@prisma/client";
-import { getAllCategories } from "@/services/categoryService";
+import { getAllCategories } from "@/services/listingService";
 
 type CategoryStore = {
   categories: Category[];

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryStep from "./CategoryStep";
 import LocationStep from "./LocationStep";
 import InfoStep from "./InfoStep";
@@ -18,13 +18,20 @@ import { ExitSvg } from "@/components/svg";
 import Loader from "@/components/Loader/Loader";
 import { useAppToast } from "@/context/AppToast";
 import { toastMsgsMap } from "@/constants/toastMsgMap";
+import AmenityStep from "./AmenityStep";
+import { useAmenity } from "@/store/AmenityStore";
 
 function ListingForm({ user }: { user?: User }) {
   const { isOpen, onClose, resetListing } = useListing();
+  const { setAmenities } = useAmenity();
   const [activStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useAppToast();
   const router = useRouter();
+
+  useEffect(() => {
+    setAmenities();
+  }, []);
 
   const methods = useForm<Omit<ListingModel<string[]>, "user">>({
     mode: "onChange",
@@ -38,6 +45,7 @@ function ListingForm({ user }: { user?: User }) {
       price: 0,
       roomCount: 1,
       title: "",
+      amenities: [],
     },
   });
   const {
@@ -51,16 +59,18 @@ function ListingForm({ user }: { user?: User }) {
   const formStep: Record<number, JSX.Element> = {
     0: <CategoryStep />,
     1: <LocationStep />,
-    2: <InfoStep />,
-    3: <ImageStep user={user} />,
-    4: <DescriptionStep />,
-    5: <PriceStep />,
+    2: <AmenityStep />,
+    3: <InfoStep />,
+    4: <ImageStep user={user} />,
+    5: <DescriptionStep />,
+    6: <PriceStep />,
   };
 
   const onSubmit: SubmitHandler<Omit<ListingModel<string[]>, "user">> = async (
     vals
   ) => {
     if (watch("price") <= 0) return;
+
     setIsLoading(true);
     try {
       const data = await createListing(vals);
@@ -70,7 +80,7 @@ function ListingForm({ user }: { user?: User }) {
         onCloseModal();
       }
     } catch (error) {
-      toast.success(`${error}`);
+      toast.error(toastMsgsMap.invalid);
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -92,7 +102,7 @@ function ListingForm({ user }: { user?: User }) {
     trigger("title");
     if (!isValid) return;
     setActiveStep((prev) => {
-      if (prev < 5) return prev + 1;
+      if (prev < 6) return prev + 1;
       return prev;
     });
   };
@@ -111,7 +121,7 @@ function ListingForm({ user }: { user?: User }) {
           <AppModal isOpen={isOpen}>
             <section className="flex p-5 shadow-sm items-center justify-center">
               <ExitSvg
-                onClick={onCloseModal}
+                onClick={onClose}
                 className="cursor-pointer absolute left-2 top-2"
               />
               <h2 className="capitalize text-lg font-bold">
@@ -131,7 +141,7 @@ function ListingForm({ user }: { user?: User }) {
               )}
 
               <Button
-                type={activStep < 5 ? "button" : "submit"}
+                type={activStep < 6 ? "button" : "submit"}
                 disabled={isLoading}
                 title="next"
                 className={`${

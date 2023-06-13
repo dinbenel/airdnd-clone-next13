@@ -45,6 +45,9 @@ export async function POST(req: IReq) {
             };
           }),
         },
+        amenities: {
+          connect: body.amenities.map((amt) => ({ id: amt })),
+        },
       },
     });
 
@@ -154,6 +157,9 @@ export async function PUT(req: IReq) {
       },
       data: {
         ...data,
+        amenities: {
+          connect: data.amenities.map((amt) => ({ id: amt })),
+        },
         user: {
           connect: {
             id: session.id,

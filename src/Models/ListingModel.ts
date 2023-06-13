@@ -14,13 +14,15 @@ export interface ListingModel<T> {
   title: string;
   description: string;
   user?: User;
+  amenities: string[];
 }
 
 interface ICountry extends Country {
   id?: string;
 }
 
-export interface DBListing extends Omit<ListingModel<string[]>, "category"> {
+export interface DBListing
+  extends Omit<ListingModel<string[]>, "category" | "amenities"> {
   category: Category[];
   likedBy?: User[];
   reviews: DbReview[];

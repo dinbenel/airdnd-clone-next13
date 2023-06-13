@@ -1,5 +1,6 @@
 import { DBListing, ListingModel } from "@/Models/ListingModel";
 import { http } from "./apiService";
+import { Amenitiy, Category } from "@prisma/client";
 
 const getAllListing = (filter: string) => {
   const params = filter?.split(",").reduce((searchParams, curr, idx) => {
@@ -36,10 +37,20 @@ const removeListing = (id: string) => {
   return http.delete(`/listing/${id}`);
 };
 
+const getAllCategories = () => {
+  return http.get<Category[]>("/category");
+};
+
+const getAllAmenities = () => {
+  return http.get<Amenitiy[]>("/amenity");
+};
+
 export {
   getAllListing,
   getListingById,
   createListing,
   updateListing,
   removeListing,
+  getAllCategories,
+  getAllAmenities,
 };
