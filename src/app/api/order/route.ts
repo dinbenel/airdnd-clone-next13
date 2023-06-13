@@ -2,7 +2,6 @@ import { IReq } from "@/Models/HttpModel";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismaClient";
 import { ErrorMap } from "@/constants/errorMap";
-import { Order } from "@prisma/client";
 import { OrderInput } from "@/Models/OrderModel";
 import { getLogedInUser } from "@/utils/getLogedInUser";
 
@@ -12,11 +11,23 @@ export async function POST(req: IReq) {
   console.log(body);
   console.log(user);
   try {
-    // await prisma?.order.create({
-    //     data:{
-
-    //     }
-    // })
+    await prisma?.order.create({
+      data: {
+        startDate: body.startDate,
+        endDate: body.endDate,
+        totalPrice: body.totalPrice,
+        listing: {
+          connect: {
+            id: body.listingId,
+          },
+        },
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+    });
     return NextResponse.json("order created succesfully");
   } catch (error) {
     console.log(error);

@@ -17,7 +17,7 @@ type State = {
 };
 
 export const useOrder = create<State>((set, get) => ({
-  adults: 0,
+  adults: 1,
   children: 0,
   infants: 0,
   isOpen: false,

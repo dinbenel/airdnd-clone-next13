@@ -3,4 +3,5 @@ export const toastMsgsMap = {
   ivalidCreds: "ivalid credentials",
   invalid: "invalid input",
   reviewSucess: "review created successfully",
+  orderSucess: "order created successfully",
 } as const;

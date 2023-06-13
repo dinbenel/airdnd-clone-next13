@@ -3,8 +3,7 @@ import PaymentCard from "../PaymentCard";
 import BodyDetails from "./BodyDetails";
 import { DBListing } from "@/Models/ListingModel";
 import ClientOnley from "@/components/ClientOnley/ClientOnley";
-import DatePicker from "@/components/Input/DatePicker";
-import PickerModal from "@/components/PickerModal/PickerModal";
+import AuthProvider from "@/context/AuthProvider";
 
 type Props = {
   user: User;
@@ -35,7 +34,9 @@ const ListingBody = ({ user, listing }: Props) => {
         amenities={amenities}
       />
       <ClientOnley>
-        <PaymentCard price={price} listingId={id!} />
+        <AuthProvider>
+          <PaymentCard price={price} listingId={id!} />
+        </AuthProvider>
       </ClientOnley>
     </section>
   );

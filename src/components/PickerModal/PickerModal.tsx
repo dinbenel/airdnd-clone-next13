@@ -1,11 +1,12 @@
 "use client";
 import { useClickAwayLisiner } from "@/hooks/useClickAwayLisiner";
 import { useOrder } from "@/store/OrderStore";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 const PickerModal = ({ children }: { children: ReactNode }) => {
   const { isPickerOpen, onClosePicker } = useOrder();
   const modalRef = useClickAwayLisiner(onClosePicker);
+
   if (!isPickerOpen) return null;
   return (
     <div

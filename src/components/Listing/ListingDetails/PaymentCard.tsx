@@ -8,9 +8,12 @@ import { MouseEvent } from "react";
 import PickerModal from "@/components/PickerModal/PickerModal";
 import DatePicker from "@/components/Input/DatePicker";
 import { useCalendar } from "@/store/CalendarStore";
-import { differenceInDays } from "date-fns";
+import { differenceInDays, format } from "date-fns";
 import { createOrder } from "@/services/orderService";
 import { OrderInput } from "@/Models/OrderModel";
+import { useSession } from "next-auth/react";
+import { useAppToast } from "@/context/AppToast";
+import { toastMsgsMap } from "@/constants/toastMsgMap";
 
 type Props = {
   price: number;
@@ -18,6 +21,8 @@ type Props = {
 };
 
 const PaymentCard = ({ price, listingId }: Props) => {
+  const { data } = useSession();
+  const toast = useAppToast();
   const serviceFee = 500;
   const { onOpen, isOpen, onOpenPicker, adults, children, infants, setCount } =
     useOrder();
@@ -40,13 +45,23 @@ const PaymentCard = ({ price, listingId }: Props) => {
   };
 
   const handleOrder = async () => {
+    if (!data?.user) {
+      toast.warning("please log-in to reserve this trip");
+      return;
+    }
     const orderToCreate: OrderInput = {
       endDate: range.endDate,
       listingId,
       startDate: range.startDate,
       totalPrice: total + serviceFee,
     };
-    createOrder(orderToCreate);
+    try {
+      await createOrder(orderToCreate);
+      toast.success(toastMsgsMap.orderSucess);
+    } catch (error) {
+      toast.error(toastMsgsMap.invalid);
+      console.log(error);
+    }
   };
 
   return (
@@ -65,26 +80,32 @@ const PaymentCard = ({ price, listingId }: Props) => {
           <section className="w-full h-32 border-neutral-700 border rounded-lg flex flex-col justify-center">
             <div className="relative flex h-[50%] justify-between items-center before:content-[''] before:absolute before:top-0 before:right-[50%] before:h-[100%] before:w-[1px] before:bg-neutral-700">
               <p
-                className="cursor-pointer p-2 w-full"
+                className="cursor-pointer p-2 w-full flex flex-col text-sm"
                 onClick={onOpenPickertModal}
               >
                 checkin
+                <span>{format(range.startDate, "dd/LL/yyyy")}</span>
               </p>
               <p
-                className="cursor-pointer p-2 w-full"
+                className="cursor-pointer p-2 w-full flex flex-col text-sm"
                 onClick={onOpenPickertModal}
               >
                 checkout
+                <span>{format(range.endDate, "dd/LL/yyyy")}</span>
               </p>
               <PickerModal>
                 <DatePicker />
               </PickerModal>
             </div>
             <div
-              className="relative flex items-center border-t-neutral-700 border-t p-2 h-[50%] cursor-pointer"
+              className="relative flex flex-col items-start border-t-neutral-700 border-t p-2 h-[50%] cursor-pointer"
               onClick={onOpenGuestModal}
             >
-              <p>guests</p>
+              <p className="text-sm">guests</p>
+              <p className="">
+                {`${adults + children} guests`}
+                {infants > 0 && `, ${infants} infants`}
+              </p>
             </div>
             <PaymentModal isOpen={isOpen}>
               <ListingCounter
