@@ -14,6 +14,7 @@ type State = {
     type: "infants" | "children" | "adults",
     action: "inc" | "dec"
   ) => void;
+  extraGuestsFee: () => number;
 };
 
 export const useOrder = create<State>((set, get) => ({
@@ -21,9 +22,16 @@ export const useOrder = create<State>((set, get) => ({
   children: 0,
   infants: 0,
   isOpen: false,
+  isPickerOpen: false,
+  extraGuestsFee: () => {
+    if (get().adults === 1) return 0;
+    if (get().children > 0) {
+      return (get().adults + get().children) * 0.6;
+    }
+    return get().adults * 0.6;
+  },
   onClose: () => set({ isOpen: false }),
   onOpen: () => set({ isOpen: true }),
-  isPickerOpen: false,
   onClosePicker: () => set({ isPickerOpen: false }),
   onOpenPicker: () => set({ isPickerOpen: true }),
   setCount: (type, action) => {

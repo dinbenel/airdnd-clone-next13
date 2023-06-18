@@ -9,3 +9,5 @@ export { default as ReviewForm } from "./ReviewForm/ReviewForm";
 export { default as MainContainer } from "./Container/MainContainer";
 export { default as SecondaryContainer } from "./Container/SecondaryContainer";
 export { default as Loader } from "./Loader/Loader";
+export { default as SideNavDashboard } from "./SideNavDashboard/SideNavDashboard";
+export { default as MenuItem } from "./MenuItem/MenuItem";

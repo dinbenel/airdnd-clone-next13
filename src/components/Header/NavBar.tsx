@@ -20,7 +20,7 @@ const NavBar = ({ user }: Props) => {
   useEffect(() => {}, [path]);
 
   let content;
-  if (path === "/") {
+  if (path === "/" || path?.includes("/dashboard")) {
     content = (
       <MainContainer>
         <nav className="flex justify-between ">

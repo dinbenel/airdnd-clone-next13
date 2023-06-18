@@ -24,11 +24,20 @@ const PaymentCard = ({ price, listingId }: Props) => {
   const { data } = useSession();
   const toast = useAppToast();
   const serviceFee = 500;
-  const { onOpen, isOpen, onOpenPicker, adults, children, infants, setCount } =
-    useOrder();
+  const {
+    onOpen,
+    isOpen,
+    onOpenPicker,
+    adults,
+    children,
+    infants,
+    setCount,
+    extraGuestsFee,
+  } = useOrder();
   const { range } = useCalendar();
   const dayDiff = differenceInDays(range.endDate, range.startDate) || 1;
   const total = price * dayDiff;
+  const extra = total * extraGuestsFee();
 
   const onOpenGuestModal = (
     ev: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
@@ -53,7 +62,7 @@ const PaymentCard = ({ price, listingId }: Props) => {
       endDate: range.endDate,
       listingId,
       startDate: range.startDate,
-      totalPrice: total + serviceFee,
+      totalPrice: total + serviceFee + extra,
     };
     try {
       await createOrder(orderToCreate);
@@ -69,12 +78,11 @@ const PaymentCard = ({ price, listingId }: Props) => {
       <section className="shadow-xl sticky top-14 p-4 w-full rounded-lg border-[1px]">
         <section className="flex justify-between">
           <p className="font-semibold text-xl text-neutral-700">
-            {currencyFormat(price)}
+            {currencyFormat(price + extra)}
             <span className="ms-1 font-normal text-lg text-neutral-500">
               night
             </span>
           </p>
-          {/* <p>15 review</p> */}
         </section>
         <section className="flex flex-col items-center mt-4">
           <section className="w-full h-32 border-neutral-700 border rounded-lg flex flex-col justify-center">
@@ -141,6 +149,10 @@ const PaymentCard = ({ price, listingId }: Props) => {
             <p>{`${price} * ${dayDiff} nights`}</p>
             <p>{currencyFormat(total)}</p>
           </section>
+          <section className="flex justify-between w-full mt-4 items-center">
+            <p>Extra Guest Fee</p>
+            <p>{currencyFormat(extra)}</p>
+          </section>
           <section className="flex justify-between w-full mt-2 items-center">
             <p>Airdnd service fee</p>
             <p>{currencyFormat(serviceFee)}</p>
@@ -149,7 +161,7 @@ const PaymentCard = ({ price, listingId }: Props) => {
         <hr className="mt-2" />
         <section className="flex justify-between w-full mt-4 items-center">
           <p>Total</p>
-          <p>{currencyFormat(total + serviceFee)}</p>
+          <p>{currencyFormat(total + serviceFee + extra)}</p>
         </section>
       </section>
     </section>

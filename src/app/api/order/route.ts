@@ -8,8 +8,7 @@ import { getLogedInUser } from "@/utils/getLogedInUser";
 export async function POST(req: IReq) {
   const body: OrderInput = await req.json();
   const user = await getLogedInUser();
-  console.log(body);
-  console.log(user);
+
   try {
     await prisma?.order.create({
       data: {
@@ -30,7 +29,6 @@ export async function POST(req: IReq) {
     });
     return NextResponse.json("order created succesfully");
   } catch (error) {
-    console.log(error);
     throw new Error(ErrorMap.invalidInput);
   }
 }

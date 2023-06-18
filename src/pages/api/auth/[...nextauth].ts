@@ -67,8 +67,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, user, token }) {
-      console.log("first");
-      console.log({ session, user, token });
       const dbUser = await prisma?.user.findUnique({
         where: {
           email: token.email as string,
@@ -80,6 +78,12 @@ export const authOptions: AuthOptions = {
           name: true,
           image: true,
           role: true,
+          createdAt: true,
+          lastName: true,
+          likes: true,
+          listings: true,
+          orders: true,
+          reviews: true,
         },
       });
 

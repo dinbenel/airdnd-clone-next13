@@ -3,7 +3,6 @@ import { categoryMap } from "@/constants/categoryMap";
 import { useCategory } from "@/store/CategoryStore";
 import { CategoryIcon } from "@prisma/client";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 type Props = {
   label: string;
@@ -20,7 +19,6 @@ const CategoryCard = ({ label, icon }: Props) => {
   const onSelect = (label: string) => {
     setSelected(label);
     const searchQuery = Array.from(selected).join(",");
-    console.log(urlParams);
 
     urlParams.append("category", searchQuery);
     const searchParams =

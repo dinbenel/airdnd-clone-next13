@@ -83,6 +83,10 @@ body
     @apply mb-2 text-sm text-gray-500 capitalize;
   }
 
+  .nav-link {
+    @apply text-center p-2 hover:bg-neutral-50/70 transition ease-in-out duration-500;
+  }
+
   .grid-listing-img {
     grid-template-columns: repeat(5, minmax(8rem, 1fr));
 

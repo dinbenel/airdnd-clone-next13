@@ -8,7 +8,7 @@ type Props = {
 
 const Header = ({ user }: Props) => {
   return (
-    <header className="w-full min-h-[74px] shadow py-3 mb-4">
+    <header className="w-full min-h-[74px] shadow py-3">
       <ClientOnley>
         <NavBar user={user} />
       </ClientOnley>

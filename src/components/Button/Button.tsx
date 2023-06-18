@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from "react";
+"use client";
+import { HTMLAttributes } from "react";
 
 type Props = {
   disabled?: boolean;
