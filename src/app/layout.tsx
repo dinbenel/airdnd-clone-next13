@@ -1,10 +1,10 @@
 import "./globals.css";
 import { ReactNode } from "react";
 import { Nunito } from "next/font/google";
-import { getLogedInUser } from "@/utils/getLogedInUser";
+import { getLoggedInUser } from "@/utils/getLoggedInUser";
 import {
   CategoryList,
-  ClientOnley,
+  ClientOnly,
   Header,
   ListingForm,
   Logister,
@@ -35,21 +35,21 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  const logedInUser = await getLogedInUser();
+  const loggedInUser = await getLoggedInUser();
 
   return (
     <html lang="en">
       <body className={`${nunito.variable} font-nunito`}>
-        <Header user={logedInUser} />
+        <Header user={loggedInUser} />
         <MainContainer>
           {/* @ts-expect-error Async Server Component  */}
           <CategoryList />
         </MainContainer>
-        <ClientOnley>
+        <ClientOnly>
           <ReviewForm />
-          <ListingForm user={logedInUser} />
+          <ListingForm user={loggedInUser} />
           <Logister formVals={{ email: "", password: "", username: "" }} />
-        </ClientOnley>
+        </ClientOnly>
         {children}
       </body>
     </html>

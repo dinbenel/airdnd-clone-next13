@@ -1,7 +1,5 @@
 "use client";
-import Map from "@/components/Map/Map";
-import Heading from "../../Heading/Heading";
-import CountrySelect from "../../Input/CountrySelect";
+import { Heading, Map, CountrySelect } from "@/components";
 
 type Props = {};
 

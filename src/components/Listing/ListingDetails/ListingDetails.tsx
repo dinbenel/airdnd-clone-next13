@@ -1,13 +1,10 @@
+import { Heading, UserAvatar, Map, ClientOnly } from "@/components";
 import { DBListing } from "@/Models/ListingModel";
 import ListingHead from "./ListingHead";
 import ListingBody from "./ListingBody/ListingBody";
 import ListingReview from "./ListingReview";
-import Map from "@/components/Map/Map";
-import Heading from "@/components/Heading/Heading";
-import UserAvatar from "@/components/UserMenu/UserAvatar";
 import AuthProvider from "@/context/AuthProvider";
 import { format } from "date-fns";
-import ClientOnley from "@/components/ClientOnley/ClientOnley";
 
 type Props = {
   listing: DBListing;
@@ -28,7 +25,7 @@ const ListingDetails = ({ listing }: Props) => {
 
       <ListingBody user={listing.user!} listing={listing} />
       <hr className="mt-4" />
-      <ClientOnley>
+      <ClientOnly>
         <AuthProvider>
           <ListingReview reviews={listing.reviews} listingId={listing.id!} />
         </AuthProvider>
@@ -44,7 +41,7 @@ const ListingDetails = ({ listing }: Props) => {
           </div>
           <p className="mt-2 text-lg font-medium">{`${listing.location?.region}, ${listing.location?.label}`}</p>
         </section>
-      </ClientOnley>
+      </ClientOnly>
       <hr className="my-4" />
       <section>
         <div className="flex w-full gap-4 items-center">

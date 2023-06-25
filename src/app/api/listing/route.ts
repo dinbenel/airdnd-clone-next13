@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismaClient";
 import { ErrorMap } from "@/constants/errorMap";
 import { IReq } from "@/Models/HttpModel";
-import { getLogedInUser } from "@/utils/getLogedInUser";
+import { getLoggedInUser } from "@/utils/getLoggedInUser";
 import { ListingModel } from "@/Models/ListingModel";
 
 export async function POST(req: IReq) {
@@ -10,7 +10,7 @@ export async function POST(req: IReq) {
   try {
     if (!body.location) return;
     const { flag, label, latlng, region, value } = body.location;
-    const session = await getLogedInUser();
+    const session = await getLoggedInUser();
 
     if (!session?.id) throw new Error(ErrorMap.notAuth);
 
@@ -122,7 +122,7 @@ export async function DELETE(req: IReq) {
   try {
     const body: { id: string } = await req.json();
 
-    const sessionPrm = getLogedInUser();
+    const sessionPrm = getLoggedInUser();
     const listingPrm = prisma?.listing.findFirst({ where: { id: body.id } });
 
     const [session, listing] = await Promise.all([sessionPrm, listingPrm]);
@@ -148,7 +148,7 @@ export async function DELETE(req: IReq) {
 export async function PUT(req: IReq) {
   try {
     const data: ListingModel<string[]> = await req.json();
-    const session = await getLogedInUser();
+    const session = await getLoggedInUser();
     if (!session.id) throw new Error(ErrorMap.notAuth);
 
     await prisma?.listing.update({

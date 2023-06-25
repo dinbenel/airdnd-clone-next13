@@ -1,6 +1,6 @@
 import { ListingPreview, Loader, MainContainer } from "@/components";
 import { getAllListing } from "@/services/listingService";
-import { getLogedInUser } from "@/utils/getLogedInUser";
+import { getLoggedInUser } from "@/utils/getLoggedInUser";
 import { Suspense } from "react";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  const logedInUserPrm = getLogedInUser();
+  const logedInUserPrm = getLoggedInUser();
   const listingsPrm = getAllListing(searchParams?.category || "");
 
   const [{ data: listings }, logedInUser] = await Promise.all([

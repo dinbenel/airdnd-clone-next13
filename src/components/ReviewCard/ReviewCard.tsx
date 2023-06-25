@@ -1,9 +1,8 @@
 "use client";
+import { UserAvatar, Button } from "@/components";
 import Rating from "@mui/material/Rating";
-import UserAvatar from "../UserMenu/UserAvatar";
 import { DbReview } from "@/Models/ReviewModel";
 import { useSession } from "next-auth/react";
-import Button from "../Button/Button";
 import { DeleteSvg, EditSvg } from "../svg";
 import { User } from "@prisma/client";
 import { deleteReview } from "@/services/reviewService";

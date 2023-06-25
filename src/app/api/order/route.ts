@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prismaClient";
 import { ErrorMap } from "@/constants/errorMap";
 import { OrderInput } from "@/Models/OrderModel";
-import { getLogedInUser } from "@/utils/getLogedInUser";
+import { getLoggedInUser } from "@/utils/getLoggedInUser";
 
 export async function POST(req: IReq) {
   const body: OrderInput = await req.json();
-  const user = await getLogedInUser();
+  const user = await getLoggedInUser();
 
   try {
     await prisma?.order.create({

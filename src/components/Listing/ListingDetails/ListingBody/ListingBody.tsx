@@ -2,8 +2,8 @@ import { User } from "@prisma/client";
 import PaymentCard from "../PaymentCard";
 import BodyDetails from "./BodyDetails";
 import { DBListing } from "@/Models/ListingModel";
-import ClientOnley from "@/components/ClientOnley/ClientOnley";
 import AuthProvider from "@/context/AuthProvider";
+import { ClientOnly } from "@/components";
 
 type Props = {
   user: User;
@@ -33,11 +33,11 @@ const ListingBody = ({ user, listing }: Props) => {
         desc={description}
         amenities={amenities}
       />
-      <ClientOnley>
+      <ClientOnly>
         <AuthProvider>
           <PaymentCard price={price} listingId={id!} />
         </AuthProvider>
-      </ClientOnley>
+      </ClientOnly>
     </section>
   );
 };

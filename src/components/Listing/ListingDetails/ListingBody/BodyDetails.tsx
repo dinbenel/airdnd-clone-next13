@@ -1,8 +1,6 @@
-import Heading from "@/components/Heading/Heading";
-import DatePicker from "@/components/Input/DatePicker";
 import Amenities from "../Amenities";
 import { Amenitiy } from "@prisma/client";
-import UserAvatar from "@/components/UserMenu/UserAvatar";
+import { Heading, UserAvatar, DatePicker } from "@/components";
 
 type Props = {
   lastName: string;

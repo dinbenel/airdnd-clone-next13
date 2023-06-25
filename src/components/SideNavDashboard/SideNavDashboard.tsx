@@ -7,7 +7,7 @@ const SideNavDashboard = () => {
 
   return (
     <aside className="flex flex-col gap-2 h-full">
-      <Link href={"/dashboard/profile"}>
+      <Link href={"/dashboard"}>
         <p className="nav-link">profile</p>
       </Link>
       <hr />

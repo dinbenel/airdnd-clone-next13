@@ -1,5 +1,5 @@
 export { default as ListingForm } from "./Listing/ListingForm/ListingForm";
-export { default as ClientOnley } from "./ClientOnley/ClientOnley";
+export { default as ClientOnly } from "./ClientOnly/ClientOnly";
 export { default as Header } from "./Header/Header";
 export { default as Logister } from "./Logister/Logister";
 export { default as CategoryList } from "./Categories/CategoryList";
@@ -11,3 +11,10 @@ export { default as SecondaryContainer } from "./Container/SecondaryContainer";
 export { default as Loader } from "./Loader/Loader";
 export { default as SideNavDashboard } from "./SideNavDashboard/SideNavDashboard";
 export { default as MenuItem } from "./MenuItem/MenuItem";
+export { default as UserAvatar } from "./UserMenu/UserAvatar";
+export { default as Heading } from "./Heading/Heading";
+export { default as Map } from "./Map/Map";
+export { default as CountrySelect } from "./Input/CountrySelect";
+export { default as DatePicker } from "./Input/DatePicker";
+export { default as Button } from "./Button/Button";
+export { default as UserProfile } from "./Dashboard/Profile";

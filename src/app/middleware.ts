@@ -6,6 +6,7 @@ const allowedOrigins =
     : ["http://localhost:3000"];
 export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
+  console.log(request);
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
