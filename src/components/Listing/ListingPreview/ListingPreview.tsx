@@ -13,7 +13,7 @@ const ListingPreview = ({ listings, user }: Props) => {
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-8 cursor-pointer">
-      {(listings || []).map((listing) => {
+      {/* {(listings || []).map((listing) => {
         return (
           <ListingCard
             listing={listing}
@@ -21,7 +21,7 @@ const ListingPreview = ({ listings, user }: Props) => {
             userId={user?.id || ""}
           />
         );
-      })}
+      })} */}
     </section>
   );
 };

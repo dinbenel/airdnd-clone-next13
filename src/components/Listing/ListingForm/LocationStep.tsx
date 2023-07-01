@@ -1,9 +1,7 @@
 "use client";
 import { Heading, Map, CountrySelect } from "@/components";
 
-type Props = {};
-
-const LocationStep = ({}: Props) => {
+const LocationStep = () => {
   return (
     <section className="p-5">
       <Heading

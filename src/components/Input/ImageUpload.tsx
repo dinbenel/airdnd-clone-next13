@@ -6,14 +6,11 @@ import { ListingModel } from "@/Models/ListingModel";
 import { User } from "@prisma/client";
 import { getImageUrl, uploadImage } from "@/lib/fireBaseClient";
 import { AddPhotoSvg, ConfirmSvg, UndoSvg } from "../svg";
+import { useSession } from "next-auth/react";
 
-const ImageUpload = ({
-  className,
-  user,
-}: {
-  className?: string;
-  user?: User;
-}) => {
+const ImageUpload = ({ className }: { className?: string }) => {
+  const { data: user } = useSession();
+
   const { setValue } = useFormContext<ListingModel<string[]>>();
   const [img, setImg] = useState<string>("");
   const [file, setFile] = useState<File>();
@@ -33,8 +30,8 @@ const ImageUpload = ({
 
   const onConfirm = async () => {
     try {
-      const _ = await uploadImage(`${user?.email}/${file?.name}`, file);
-      const urls = await getImageUrl(`${user?.email}/`);
+      const _ = await uploadImage(`${user?.user?.email}/${file?.name}`, file);
+      const urls = await getImageUrl(`${user?.user?.email}/`);
       const url = urls.find((u) => u.includes(file?.name + ""));
       setValue("imageSrc", url!);
     } catch (error) {

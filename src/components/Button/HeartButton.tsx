@@ -41,7 +41,7 @@ const HeartButton = ({ listingId, listingLikedBy, userId }: Props) => {
     >
       <HeartSvg className="absolute text-3xl  fill-white right-0" />
       <HeartFillSvg
-        className={`absolute text-[1.4rem] right-[3px] top-[3.5px] ${
+        className={`absolute text-[1.6rem] right-[2px] top-[2px] ${
           isLiked ? "fill-rose-400" : "fill-slate-400"
         }`}
       />

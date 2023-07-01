@@ -11,6 +11,7 @@ import {
   MainContainer,
   ReviewForm,
 } from "@/components";
+import AuthProvider from "@/context/AuthProvider";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -46,9 +47,11 @@ export default async function RootLayout({
           <CategoryList />
         </MainContainer>
         <ClientOnly>
-          <ReviewForm />
-          <ListingForm user={loggedInUser} />
-          <Logister formVals={{ email: "", password: "", username: "" }} />
+          <AuthProvider>
+            <ReviewForm />
+            <ListingForm user={loggedInUser} />
+            <Logister formVals={{ email: "", password: "", username: "" }} />
+          </AuthProvider>
         </ClientOnly>
         {children}
       </body>

@@ -13,15 +13,13 @@ import { useListing } from "@/store/ListingStore";
 import { createListing } from "@/services/listingService";
 import { useRouter } from "next/navigation";
 import { ListingModel } from "@/Models/ListingModel";
-import { User } from "@prisma/client";
-import { ExitSvg } from "@/components/svg";
 import Loader from "@/components/Loader/Loader";
 import { useAppToast } from "@/context/AppToast";
 import { toastMsgsMap } from "@/constants/toastMsgMap";
 import AmenityStep from "./AmenityStep";
 import { useAmenity } from "@/store/AmenityStore";
 
-function ListingForm({ user }: { user?: User }) {
+function ListingForm() {
   const { isOpen, onClose, resetListing } = useListing();
   const { setAmenities } = useAmenity();
   const [activStep, setActiveStep] = useState(0);
@@ -61,7 +59,7 @@ function ListingForm({ user }: { user?: User }) {
     1: <LocationStep />,
     2: <AmenityStep />,
     3: <InfoStep />,
-    4: <ImageStep user={user} />,
+    4: <ImageStep />,
     5: <DescriptionStep />,
     6: <PriceStep />,
   };
@@ -118,18 +116,19 @@ function ListingForm({ user }: { user?: User }) {
     <section>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <AppModal isOpen={isOpen}>
-            <section className="flex p-5 shadow-sm items-center justify-center">
-              <ExitSvg
-                onClick={onClose}
-                className="cursor-pointer absolute left-2 top-2"
-              />
+          <AppModal
+            isOpen={isOpen}
+            setOpen={() => {
+              onClose();
+            }}
+          >
+            <section className="flex shadow-sm items-center justify-center p-2">
               <h2 className="capitalize text-lg font-bold">
                 airDnD your home!
               </h2>
             </section>
             {formStep[activStep]}
-            <section className={`p-5 w-full flex gap-2 justify-between mt-2`}>
+            <section className={` w-full flex gap-2 justify-between`}>
               {activStep !== 0 && (
                 <Button
                   type="button"

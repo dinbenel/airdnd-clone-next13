@@ -3,7 +3,6 @@ import { User } from "@prisma/client";
 import { UserAvatar } from "@/components";
 import { format } from "date-fns";
 import { useState } from "react";
-import AppModal from "../AppModal/AppModal";
 
 type Props = {
   user: User;
@@ -37,7 +36,6 @@ const Profile = ({ user }: Props) => {
       >
         update profile
       </button>
-      <AppModal></AppModal>
     </>
   );
 };

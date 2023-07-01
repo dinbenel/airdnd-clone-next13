@@ -1,20 +1,38 @@
 "use client";
 import { ReactNode } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 type Props = {
   children: ReactNode;
   isOpen?: boolean;
+  setOpen: (open: boolean) => void;
 };
 
-const AppModal = ({ isOpen, children }: Props) => {
+const AppModal = ({ isOpen, children, setOpen }: Props) => {
   if (!isOpen) return null;
-
+  const handleModalOpen = () => {
+    setOpen(false);
+  };
   return (
-    <div className="absolute flex inset-0 bg-black/60 items-center justify-center z-40 h-[120vh] w-full">
-      <div className="shadow border-[1px] bg-white rounded-lg min-w-[35%] relative">
+    <Dialog open={isOpen} onOpenChange={handleModalOpen}>
+      <DialogContent className="">
+        {/* <DialogHeader className="flex flex-col items-center justify-center">
+          <div>
+            <DialogTitle className="text-xl">{title}</DialogTitle>
+            <DialogDescription className="text-base">
+              {subTitle}
+            </DialogDescription>
+          </div>
+        </DialogHeader> */}
         {children}
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

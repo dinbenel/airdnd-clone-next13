@@ -13,7 +13,7 @@ function Button({ Icon, title, disabled, className, type, ...props }: Props) {
       {...props}
       type={type}
       disabled={disabled}
-      className={`mt-4  ${className} ${disabled ? "disabled" : ""} btn`}
+      className={`  ${className} ${disabled ? "disabled" : ""} btn`}
     >
       {title}
       {Icon && <Icon />}
