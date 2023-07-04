@@ -5,13 +5,26 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 type Props = {
   children: ReactNode;
   trigEl: ReactNode;
+  align?: "center" | "start" | "end";
+  alignOffset?: number;
+  className?: string;
 };
 
-const PopOverMenu = ({ children, trigEl }: Props) => {
+const PopOverMenu = ({
+  children,
+  trigEl,
+  align = "end",
+  alignOffset,
+  className,
+}: Props) => {
   return (
     <Popover>
       <PopoverTrigger>{trigEl}</PopoverTrigger>
-      <PopoverContent align="end" className="">
+      <PopoverContent
+        align={align}
+        alignOffset={alignOffset}
+        className={className}
+      >
         {children}
       </PopoverContent>
     </Popover>

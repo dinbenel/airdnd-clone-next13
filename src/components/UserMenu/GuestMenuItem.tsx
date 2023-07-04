@@ -10,7 +10,7 @@ const GuestMenuItem = () => {
   };
 
   return (
-    <section className="absolute shadow border-[1px] py-2 w-full top-14 left-0 z-10 bg-white rounded-lg">
+    <section className="shadow border-[1px] py-2 w-full bg-white rounded-lg">
       <div onClick={() => onOpenModal("login")} className="user-menu-item">
         log in
       </div>
