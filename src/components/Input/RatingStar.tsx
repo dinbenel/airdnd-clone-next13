@@ -8,7 +8,7 @@ const StarRating = () => {
   const rating = watch("rating");
 
   return (
-    <div className="p-4">
+    <div className="">
       <Rating
         size="large"
         name="half-rating"

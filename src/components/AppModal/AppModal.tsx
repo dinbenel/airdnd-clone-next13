@@ -21,7 +21,7 @@ const AppModal = ({ isOpen, children, setOpen }: Props) => {
   };
   return (
     <Dialog open={isOpen} onOpenChange={handleModalOpen}>
-      <DialogContent className="">
+      <DialogContent className="bg-white">
         {/* <DialogHeader className="flex flex-col items-center justify-center">
           <div>
             <DialogTitle className="text-xl">{title}</DialogTitle>

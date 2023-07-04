@@ -20,7 +20,7 @@ type Props = {
 };
 
 const Logister = ({ formVals }: Props) => {
-  const { isOpen, type, onClose } = useLogister();
+  const { isOpen, type, onClose, setType } = useLogister();
   const toast = useAppToast();
   const [subTitle] = useState(
     type === "login" ? "log in with your acount" : "create an acount"
@@ -80,16 +80,26 @@ const Logister = ({ formVals }: Props) => {
     setIsLoading(loading);
   };
 
+  const moveToLoginOrSignup = () => {
+    type === "login" ? setType("register") : setType("login");
+  };
+
   return (
-    <AppModal isOpen={isOpen}>
-      <div className="relative flex flex-col w-full items-center justify-center bg-gray-50 p-4 rounded-lg">
-        <ExitSvg
+    <AppModal
+      isOpen={isOpen}
+      setOpen={() => {
+        reset();
+        onClose();
+      }}
+    >
+      <div className="relative flex flex-col w-full items-center justify-center rounded-lg">
+        {/* <ExitSvg
           className="absolute top-2 left-2 cursor-pointer"
           onClick={onClose}
-        />
+        /> */}
         <form
           onSubmit={handleSubmit(submitHandler)}
-          className="flex flex-col w-full p-4"
+          className="flex flex-col w-full p-2 gap-2"
         >
           <h2 className="mt-2 self-center capitalize font-bold text-xl">
             welcome to airdnd
@@ -125,9 +135,9 @@ const Logister = ({ formVals }: Props) => {
           <Button
             disabled={isLoading}
             title="continue"
-            className="form-submit"
+            className="form-submit mt-2"
           />
-          <div className="flex items-center justify-between my-4">
+          <div className="flex items-center justify-between">
             <div className="bg-slate-200/50 h-[2px] w-[44%]"></div>
             <span className="text-base text-gray-400">or</span>
             <div className=" bg-slate-200/50 h-[2px] w-[47%]"></div>
@@ -139,6 +149,17 @@ const Logister = ({ formVals }: Props) => {
           />
           <Loader isLoading={isLoading} size={15} />
         </form>
+        <div className="flex gap-2">
+          <p className="first-letter:capitalize text-zinc-500 font-light text-sm">{`${
+            type === "login" ? "dont" : "already"
+          } have an acount?`}</p>
+          <button
+            onClick={moveToLoginOrSignup}
+            className="text-zinc-500 font-medium text-sm"
+          >
+            {type === "login" ? "sign-up" : "log-in"}
+          </button>
+        </div>
       </div>
     </AppModal>
   );

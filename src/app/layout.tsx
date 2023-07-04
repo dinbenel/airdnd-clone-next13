@@ -49,7 +49,7 @@ export default async function RootLayout({
         <ClientOnly>
           <AuthProvider>
             <ReviewForm />
-            <ListingForm user={loggedInUser} />
+            <ListingForm />
             <Logister formVals={{ email: "", password: "", username: "" }} />
           </AuthProvider>
         </ClientOnly>

@@ -9,7 +9,7 @@ const UserMenuItem = () => {
   const router = useRouter();
 
   return (
-    <div className="absolute shadow border-[1px] py-2 w-full top-14 left-0 z-40 bg-white rounded-lg">
+    <div className="border-[1px] py-2 w-full bg-white rounded-lg">
       <MenuItem onClick={() => router.push("/dashboard")} title="dashboard" />
       <MenuItem onClick={onOpen} title="airdnd your home" />
       <hr className="bg-neutral-200 mt-4" />

@@ -120,6 +120,9 @@ function ListingForm() {
             isOpen={isOpen}
             setOpen={() => {
               onClose();
+              setActiveStep(0);
+              resetListing();
+              reset();
             }}
           >
             <section className="flex shadow-sm items-center justify-center p-2">

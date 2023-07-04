@@ -21,7 +21,7 @@ const Input = ({
   type = "text",
 }: Props) => {
   return (
-    <div className="flex flex-col mb-5">
+    <div className="flex flex-col">
       <label htmlFor={id} className="form-label">
         {label}
       </label>
